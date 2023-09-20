@@ -1,0 +1,109 @@
+@{
+    ViewData["Title"] = "Service Order";
+}
+<!-- Step 1, første utfylling-->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="step1">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStep1" aria-expanded="true" aria-controls="collapseStep1">
+      Kontaktinformasjon
+    </button>
+  </h2>
+  <div id="collapseStep1" class="accordion-collapse collapse show" aria-labelledby="step1">
+    <div class="accordion-body">
+      <div class="my-3">
+        <div class="form-group">
+          <label for="Navn">Navn:</label>
+          <input type="text" id="Navn" name="Navn" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="Adresse">Adresse:</label>
+          <input type="text" id="Adresse" name="Adresse" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="Telefonnummer">Telefonnummer:</label>
+          <input type="text" id="Telefonnummer" name="Telefonnummer" class="form-control">
+          </div>
+        <button type="button" class="btn btn-primary" id="nextStep1">Neste</button> <!-- Next Button for Step 1 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="step2">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStep2" aria-expanded="false" aria-controls="collapseStep2">
+      Ordrebeskrivelse
+    </button>
+  </h2>
+  <div id="collapseStep2" class="accordion-collapse collapse" aria-labelledby="step2">
+    <div class="accordion-body">
+      <div class="my-3">
+        <div class="form-group">
+          <label for="VinsjID">SerieID for Vinsj:</label>
+          <input type="text" id="VinsjID" name="VinsjID" class="form-control">
+        </div>
+    
+        <button type="button" class="btn btn-primary" id="nextStep2">Neste</button> <!-- Next Button for Step 2 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Step 3 -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="step3">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStep3" aria-expanded="false" aria-controls="collapseStep3">
+      Kommentar
+    </button>
+  </h2>
+  <div id="collapseStep3" class="accordion-collapse collapse" aria-labelledby="step3">
+    <div class="accordion-body">
+      <div class="my-3">
+        <div class="form-group">
+          <label for="serviceKommentar">Ekstra kommentar</label>
+          <input type="text" id="serviceKommentar" name="serviceKommentar" class="form-control">
+        </div>
+        <button type="button" class="btn btn-primary" id="submitAll">Submit</button> <!-- Submit All Button for Step 3 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get all the Next buttons
+    var nextButtons = document.querySelectorAll('[id^="nextStep"]');
+
+    // Add click event listeners to Next buttons
+    nextButtons.forEach(function (button, index) {
+      button.addEventListener('click', function () {
+        // Calculate the index of the next accordion header button
+        var nextStepIndex = index + 2; // Index of the next accordion header button
+        var nextStepButton = document.querySelector('#step' + nextStepIndex + ' button');
+
+        // Trigger the click event on the next accordion header button
+        if (nextStepButton) {
+          nextStepButton.click();
+
+          // Close the current accordion panel (step)
+          var currentStepIndex = index + 1; // Index of the current accordion panel (step)
+          var currentStepPanel = document.querySelector('#collapseStep' + currentStepIndex);
+          if (currentStepPanel) {
+            currentStepPanel.classList.remove('show'); // Remove the 'show' class to close the panel
+          }
+        }
+      });
+    });
+  });
+</script>
+
+
+
