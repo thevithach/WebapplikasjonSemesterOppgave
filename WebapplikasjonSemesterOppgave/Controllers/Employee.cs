@@ -58,12 +58,17 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Designation,Department,Email")] EmployeeEntity employeeEntity)
         {
+            // Sjekker om modellen er gyldig (employeeEntity objektet) ifh data annotasjonene og valideringen.
             if (ModelState.IsValid)
             {
+                // Hvis gyldig legger til og lagrer til database
                 _context.Add(employeeEntity);
                 await _context.SaveChangesAsync();
+                // Redirecter deg til index
                 return RedirectToAction(nameof(Index));
             }
+            // Hvis modellen er ugyldig, eks: validering errors, vil den returnere samme "Create" view med samme objekt
+            // Tillater bruker å skrive om errors som oppstår ifh validering og kan dermed submitte formen igjen
             return View(employeeEntity);
         }
 
