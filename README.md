@@ -13,4 +13,6 @@ Gå i terminalen og gå deretter i my/own/datadir mappen også skriv pwd for å 
 Etter du har satt opp database:
 
 Kjør i terminal i prosjektmappe:
-dotnet ef database update --project ./WebapplikasjonSemesterOppgave
+dotnet tool install --global dotnet-ef
+dotnet ef database update --project ./WebapplikasjonSemesterOppgave --context ApplicationDbContext
+dotnet ef database update --project ./WebapplikasjonSemesterOppgave --context DbContextSample
