@@ -1,6 +1,6 @@
 # WebapplikasjonSemesterOppgave
 
-KJØR: 
+Kjør i terminal: 
 docker pull mariadb
 
 docker run --rm --name is201-mariadb -p 127.0.0.1:3306:3306/tcp -v /my/own/datadir:/var/lib/mysql -e
