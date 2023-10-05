@@ -1,8 +1,22 @@
-﻿@{
+﻿@model IEnumerable<HomeEntity>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2 class="text-center mb-5 mt-5">Bruker Verktøy</h2>
+<div class="container">
+    <div class="row">
+        <!-- Foreach som looper gjennom listen i HomeController ved index 
+         Den tar svg og text som input i controlleren og bruker div-klassene i _MyPartialView
+         for å danne bokser med ikoner og tekst som etterhvert skal være klikkbare
+    -->
+        @foreach (var item in Model)
+        {
+            <partial name="_MyPartialView" model="item" />
+        }
+    </div>
 </div>
+
+<!-- Legg til ansattliste og notifikasjoner/meldinger -->
+
+
