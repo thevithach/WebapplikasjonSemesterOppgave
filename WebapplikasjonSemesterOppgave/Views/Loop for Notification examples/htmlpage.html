@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <asp:Timer ID="Timer1" runat="server" Interval="6000" ontick="Timer1_Tick" />
+</head>
+
+<body>
+    window.setInterval(function () {
+    // this will execute every 1 second
+
+    methodCallOrAction();
+
+    }, 1000);
+
+
+
+    function methodCallOrAction()
+    {
+    // u can call an url or do something here
+    }
+    <script type="text/javascript">
+        setTimeout(function () {
+            location.reload();
+        }, 5 * 60 * 1000);
+    </script>
+    //* refer Refresh Page for interval using js
+
+    You can refresh the page this way
+
+    for the controller you might need a table in database to refer, 
+    when was last updated,
+    for reference you will have to store reference data permanently ,
+    this is my opinion, I never had such requirement //*
+</body>
+</html>

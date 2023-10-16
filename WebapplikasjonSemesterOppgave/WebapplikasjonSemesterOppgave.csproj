@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+
+  <ItemGroup>
+    <Compile Remove="Views\Loop for Notification examples\**" />
+    <Compile Remove="Views\Loop for Notification\**" />
+    <Compile Remove="Views\Notification\**" />
+    <Content Remove="Views\Loop for Notification examples\**" />
+    <Content Remove="Views\Loop for Notification\**" />
+    <Content Remove="Views\Notification\**" />
+    <EmbeddedResource Remove="Views\Loop for Notification examples\**" />
+    <EmbeddedResource Remove="Views\Loop for Notification\**" />
+    <EmbeddedResource Remove="Views\Notification\**" />
+    <None Remove="Views\Loop for Notification examples\**" />
+    <None Remove="Views\Loop for Notification\**" />
+    <None Remove="Views\Notification\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
