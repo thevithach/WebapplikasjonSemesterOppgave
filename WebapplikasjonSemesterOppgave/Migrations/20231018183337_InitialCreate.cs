@@ -16,66 +16,23 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "OrderEntity",
+                name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProductType = table.Column<string>(type: "longtext", nullable: true)
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SerialNumber = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ModelYear = table.Column<string>(type: "longtext", nullable: false)
+                    NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Warranty = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ServiceOrRepair = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CustomerAgreement = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ReparationDetails = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    WorkingHours = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ReplacedPartsReturned = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShippingMethods = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderEntity", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderEntity_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderEntity_UserId",
-                table: "OrderEntity",
-                column: "UserId",
-                unique: true);
-
-            //migrationBuilder.CreateTable(
-            //    name: "AspNetRoles",
-            //    columns: table => new
-            //    {
-            //        Id = table.Column<string>(type: "varchar(255)", nullable: false)
-            //            .Annotation("MySql:CharSet", "utf8mb4"),
-            //        Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
-            //            .Annotation("MySql:CharSet", "utf8mb4"),
-            //        NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
-            //            .Annotation("MySql:CharSet", "utf8mb4"),
-            //        ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
-            //            .Annotation("MySql:CharSet", "utf8mb4")
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-            //    })
-            //    .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
@@ -245,7 +202,90 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            
+            migrationBuilder.CreateTable(
+                name: "OrderEntity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ProductType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SerialNumber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ModelYear = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Warranty = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    ServiceOrRepair = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    CustomerAgreement = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReparationDetails = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    WorkingHours = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReplacedPartsReturned = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShippingMethods = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderEntity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderEntity_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ChecklistItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ClutchlamelerSlitasje = table.Column<int>(type: "int", nullable: true),
+                    Bremser = table.Column<int>(type: "int", nullable: true),
+                    LagerforTrommel = table.Column<int>(type: "int", nullable: true),
+                    PTOogOpplagring = table.Column<int>(type: "int", nullable: true),
+                    Kjedestrammer = table.Column<int>(type: "int", nullable: true),
+                    Wire = table.Column<int>(type: "int", nullable: true),
+                    PinionLager = table.Column<int>(type: "int", nullable: true),
+                    KilepåKjedehjul = table.Column<int>(type: "int", nullable: true),
+                    SylinderLekkasje = table.Column<int>(type: "int", nullable: true),
+                    SlangeSkadeLekkasje = table.Column<int>(type: "int", nullable: true),
+                    HydraulikkblokkTestbenk = table.Column<int>(type: "int", nullable: true),
+                    SkiftOljeiTank = table.Column<int>(type: "int", nullable: true),
+                    SkiftOljepåGirboks = table.Column<int>(type: "int", nullable: true),
+                    Ringsylinder = table.Column<int>(type: "int", nullable: true),
+                    Bremsesylinder = table.Column<int>(type: "int", nullable: true),
+                    LedningsnettpåVinsj = table.Column<int>(type: "int", nullable: true),
+                    TestRadio = table.Column<int>(type: "int", nullable: true),
+                    Knappekasse = table.Column<int>(type: "int", nullable: true),
+                    XxBar = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    VinsjKjørAlleFunksjoner = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TrekkraftKN = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BremsekraftKN = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChecklistItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChecklistItems_OrderEntity_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "OrderEntity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -284,7 +324,15 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                 column: "NormalizedUserName",
                 unique: true);
 
-            
+            migrationBuilder.CreateIndex(
+                name: "IX_ChecklistItems_OrderId",
+                table: "ChecklistItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderEntity_UserId",
+                table: "OrderEntity",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -306,10 +354,13 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "OrderEntity");
+                name: "ChecklistItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "OrderEntity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
