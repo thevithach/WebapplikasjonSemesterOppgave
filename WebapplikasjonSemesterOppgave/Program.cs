@@ -1,14 +1,24 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+//builder.Services.AddDbContext<IdentityDbContext>(options =>
+//    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'IdentityDbContext' not found.")));
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DBContextSampleConnection' not found.");
 
 builder.Services.AddDbContext<DBContextSample>(options =>
-options.UseMySql(connectionString, new MySqlServerVersion(new Version(10, 5, 11))));
+options.UseMySql(connectionString, new MySqlServerVersion(new Version(11, 1, 2))));
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseMySql(connectionString, new MySqlServerVersion(new Version(10, 5, 11))));
-builder.Services.AddDefaultIdentity<SampleUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DBContextSample>();
+options.UseMySql(connectionString, new MySqlServerVersion(new Version(11, 1, 2))));
+
+
+
+
+builder.Services.AddDefaultIdentity<SampleUser>().AddDefaultTokenProviders()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<DBContextSample>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

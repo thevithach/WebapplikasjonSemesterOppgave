@@ -1,0 +1,249 @@
+@model WebapplikasjonSemesterOppgave.Models.ServiceChecklistEntity
+
+<h1>Service Ordre</h1>
+<div>
+    <strong>Order ID:</strong> @Model.OrderId
+    <strong>Sjekkliste for: @Model.Order.UserId</strong>
+</div>
+<table class="table table-striped table-hover table-bordered text-center">
+<thead class="table table-info table-striped">
+<tr class="text-center">
+    <th colspan="1">Serienummer: @Model.Order.SerialNumber</th>
+    <th colspan="3">Type: @Model.Order.ProductType</th>
+
+</tr>
+</thead>
+<thead class="table-dark">
+<tr class="text-center">
+
+<th>Sjekkpunkter</th>
+<th>OK</th>
+<th>Bør skiftes</th>
+<th>Defekt</th>
+</tr>
+</thead>
+<thead class="table table-success table-striped">
+        <tr class="text-center">
+            <th colspan="4">Mekaniker</th>
+        </tr>
+    </thead>
+<tbody>
+
+<tr>
+    <td>Sjekk clutch lameller Slitasje:</td>
+    <td> <input type="radio" name="ClutchlamelerSlitasje" value="OK" @(Model.ClutchlamelerSlitasje == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="ClutchlamelerSlitasje" value="Bør Skiftes" @(Model.ClutchlamelerSlitasje == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="ClutchlamelerSlitasje" value="Defekt" @(Model.ClutchlamelerSlitasje == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk bremser. Bånd/Pal</td>
+    <td> <input type="radio" name="Bremser" value="OK" @(Model.Bremser == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="Bremser" value="Bør Skiftes" @(Model.Bremser == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="Bremser" value="Defekt" @(Model.Bremser == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk lager for trommel</td>
+    <td> <input type="radio" name="Trommel" value="OK" @(Model.LagerforTrommel == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="Trommel" value="Bør Skiftes" @(Model.LagerforTrommel == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="Trommel" value="Defekt" @(Model.LagerforTrommel == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk PTO og opplagring</td>
+    <td> <input type="radio" name="PTOopplagring" value="OK" @(Model.PTOogOpplagring == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="PTOopplagring" value="Bør Skiftes" @(Model.PTOogOpplagring == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="PTOopplagring" value="Defekt" @(Model.PTOogOpplagring == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk kjedestrammer</td>
+    <td> <input type="radio" name="Kjedestrammer" value="OK" @(Model.Kjedestrammer == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="Kjedestrammer" value="Bør Skiftes" @(Model.Kjedestrammer == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="Kjedestrammer" value="Defekt" @(Model.Kjedestrammer == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk wire</td>
+    <td> <input type="radio" name="Wire" value="OK" @(Model.Wire == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="Wire" value="Bør Skiftes" @(Model.Wire == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="Wire" value="Defekt" @(Model.Wire == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk pinion lager</td>
+    <td> <input type="radio" name="pinionLager" value="OK" @(Model.PinionLager == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="pinionLager" value="Bør Skiftes" @(Model.PinionLager == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="pinionLager" value="Defekt" @(Model.PinionLager == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk kile på kjedehjul</td>
+    <td> <input type="radio" name="kilepåKjedehjul" value="OK" @(Model.KilepåKjedehjul == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="kilepåKjedehjul" value="Bør Skiftes" @(Model.KilepåKjedehjul == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="kilepåKjedehjul" value="Defekt" @(Model.KilepåKjedehjul == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<thead class="table table-success table-striped">
+        <tr class="text-center">
+            <th colspan="4">Hydraulisk</th>
+        </tr>
+    </thead>
+@* Hydraulisk *@
+<tr>
+    <td>Sjekk hydraulikk sylinder for lekkasje</td>
+    <td> <input type="radio" name="hydraulikkSylinder" value="OK" @(Model.SylinderLekkasje == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="hydraulikkSylinder" value="Bør Skiftes" @(Model.SylinderLekkasje == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="hydraulikkSylinder" value="Defekt" @(Model.SylinderLekkasje == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk hydraulikk sylinder for lekkasje</td>
+    <td> <input type="radio" name="slangeSkade" value="OK" @(Model.SlangeSkadeLekkasje == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="slangeSkade" value="Bør Skiftes" @(Model.SlangeSkadeLekkasje == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="slangeSkade" value="Defekt" @(Model.SlangeSkadeLekkasje == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Test hydraulikkblokk i testbenk</td>
+    <td> <input type="radio" name="hydraulikkBlokk" value="OK" @(Model.HydraulikkblokkTestbenk == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="hydraulikkBlokk" value="Bør Skiftes" @(Model.HydraulikkblokkTestbenk == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="hydraulikkBlokk" value="Defekt" @(Model.HydraulikkblokkTestbenk == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Skift olje i tank</td>
+    <td> <input type="radio" name="skiftoljeiTank" value="OK" @(Model.SkiftOljeiTank == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="skiftoljeiTank" value="Bør Skiftes" @(Model.SkiftOljeiTank == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="skiftoljeiTank" value="Defekt" @(Model.SkiftOljeiTank == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Skift olje på gir boks</td>
+    <td> <input type="radio" name="skiftoljepåGirboks" value="OK" @(Model.SkiftOljepåGirboks == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="skiftoljepåGirboks" value="Bør Skiftes" @(Model.SkiftOljepåGirboks == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="skiftoljepåGirboks" value="Defekt" @(Model.SkiftOljepåGirboks == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Skift Ringsylinder åpne og skift tetninger</td>
+    <td> <input type="radio" name="skiftRingsylinder" value="OK" @(Model.Ringsylinder == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="skiftRingsylinder" value="Bør Skiftes" @(Model.Ringsylinder == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="skiftRingsylinder" value="Defekt" @(Model.Ringsylinder == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk bremse sylinder åpne og skift tetninger</td>
+    <td> <input type="radio" name="bremseSylinder" value="OK" @(Model.Bremsesylinder == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="bremseSylinder" value="Bør Skiftes" @(Model.Bremsesylinder == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="bremseSylinder" value="Defekt" @(Model.Bremsesylinder == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+@* Elektro *@
+<thead class="table table-success table-striped">
+        <tr class="text-center">
+            <th colspan="4">Elektro</th>
+        </tr>
+    </thead>
+<tr>
+    <td>Sjekk ledningsnett på vinsj</td>
+    <td> <input type="radio" name="ledningsnettVinsj" value="OK" @(Model.LedningsnettpåVinsj == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="ledningsnettVinsj" value="Bør Skiftes" @(Model.LedningsnettpåVinsj == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="ledningsnettVinsj" value="Defekt" @(Model.LedningsnettpåVinsj == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk og test radio</td>
+    <td> <input type="radio" name="testRadio" value="OK" @(Model.TestRadio == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="testRadio" value="Bør Skiftes" @(Model.TestRadio == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="testRadio" value="Defekt" @(Model.TestRadio == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+<tr>
+    <td>Sjekk og test knappekasse</td>
+    <td> <input type="radio" name="knappeKasse" value="OK" @(Model.Knappekasse == ChecklistItemCondition.OK ? "checked" : "")> OK
+    </td>
+    <td><input type="radio" name="knappeKasse" value="Bør Skiftes" @(Model.Knappekasse == ChecklistItemCondition.Bør_Skiftes ? "checked" : "")> Bør Skiftes
+    </td>
+    <td><input type="radio" name="knappeKasse" value="Defekt" @(Model.Knappekasse == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
+    </td>
+</tr>
+@* Trykksettinger *@
+<thead class="table table-success table-striped">
+<tr class="text-center">
+    <th colspan="4">Trykk settinger</th>
+</tr>
+</thead>
+<tr>
+    <td colspan="1">xx-Bar</td>
+    <td colspan="3"><p>@Model.XxBar</p></td>
+</tr>
+@* Funksjonstest *@
+
+<thead class="table table-success table-striped">
+<tr class="text-center">
+    <th colspan="4">Funksjons test</th>
+</tr>
+</thead>
+<tr>
+    <td colspan="1">Test vinsj og kjør alle funksjoner</td>
+    <td colspan="3"><p>@Model.VinsjKjørAlleFunksjoner</p></td>
+</tr>
+<tr>
+    <td colspan="1">Trekkraft KN</td>
+    <td colspan="3"><p>@Model.TrekkraftKN</p></td>
+</tr>
+<tr>
+    <td colspan="1">Bremsekraft KN</td>
+    <td colspan="3"><p>@Model.BremsekraftKN</p></td>
+</tr>
+<thead class="table table-success table-striped">
+<tr class="text-center">
+    <th colspan="4">Kommentar</th>
+</tr>
+</thead>
+<tr>
+    <td colspan="1">Kommentar</td>
+    <td colspan="3"><p></p></td>
+</tr>
+
+</tbody>
+</table>
+
+<a asp-controller="ServiceOrder" asp-action="Index">Back to Service Orders</a>
+<a asp-controller="ServiceCheckList" asp-action="Edit" asp-route-id="@Model.Id">Edit Checklist</a>

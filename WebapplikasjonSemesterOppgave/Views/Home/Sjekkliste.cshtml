@@ -1,0 +1,131 @@
+﻿@model IEnumerable<HomeEntity>
+@{
+    ViewData["Title"] = "Sjekkliste for mekaniker";
+}
+
+    <h2 class="text-center mb-2 mt-2">Ansatt</h2>
+        <div class="container">
+            <div class="row">
+                <!-- Foreach som looper gjennom listen i HomeController ved index
+                     Den tar svg og text som input i controlleren og bruker div-klassene i _MyPartialView
+                     for å danne bokser med ikoner og tekst som etterhvert skal være klikkbare
+                -->
+                @foreach (var item in Model)
+                {
+                    <partial name="_MyPartialView" model="item" />
+                }
+                <form asp-action="Create" method="post">
+                <table class="table table-striped table-hover table-bordered text-center">
+                    <thead class="table-dark">
+                    <tr class="text-center">
+                        <th>Sjekkpunkter</th>
+                        <th>OK</th>
+                        <th>Bør skiftes</th>
+                        <th>Defekt</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Sjekk clutch lameller for slitasje</td>
+                        <td>
+                            <input type="radio" name="clutchLameller" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="clutchLameller" value="Bør skiftes"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="clutchLameller" value="Defekt"> Defekt
+                        </td>
+                                   
+                    </tr>
+                    <tr>
+                        <td>Sjekk bremser. Bånd/ Pal</td>
+                        <td>
+                            <input type="radio" name="bremser" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="bremser" value="Bør skiftes"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="bremser" value="Defekt"> Defekt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sjekk lager for trommel</td>
+                        <td>
+                            <input type="radio" name="trommel" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="trommel" value="Bør skiftes"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="trommel" value="Defekt"> Defekt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sjekk PTO og opplagring</td>
+                        <td>
+                            <input type="radio" name="ptoOpplagring" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="ptoOpplagring" value="Bør skiftes"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="ptoOpplagring" value="Defekt"> Defekt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sjekk kjedestrammer</td>
+                        <td>
+                            <input type="radio" name="kjedestrømmer" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="kjedestrømmer" value="Defekt"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="kjedestrømmer" value="Defekt"> Defekt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sjekk wire</td>
+                        <td>
+                            <input type="radio" name="wire" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="wire" value="Bør skiftes"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="wire" value="Defekt"> Defekt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sjekk pinion lager</td>
+                        <td>
+                            <input type="radio" name="pinionLager" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="pinionLager" value="Bør skiftes"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="pinionLager" value="Defekt"> Defekt
+                        </td>
+                    </tr>
+                    <tr><td>Sjekk kile på kjedehjul</td>
+                        <td>
+                            <input type="radio" name="kileKjedehul" value="OK"> OK
+                        </td>
+                        <td>
+                            <input type="radio" name="kileKjedehul" value="Bør skiftes"> Bør skiftes
+                        </td>
+                        <td>
+                            <input type="radio" name="kileKjedehul" value="Defekt"> Defekt
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </div>
+        </div>
+
+
