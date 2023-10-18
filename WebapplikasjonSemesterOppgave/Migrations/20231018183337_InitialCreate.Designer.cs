@@ -11,8 +11,8 @@ using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
 namespace WebapplikasjonSemesterOppgave.Migrations
 {
     [DbContext(typeof(DBContextSample))]
-    [Migration("20231018110219_RemovingNotNullOnModels")]
-    partial class RemovingNotNullOnModels
+    [Migration("20231018183337_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

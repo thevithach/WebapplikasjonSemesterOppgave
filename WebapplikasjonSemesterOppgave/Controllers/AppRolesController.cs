@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebapplikasjonSemesterOppgave.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public class AppRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
