@@ -1,0 +1,114 @@
+@model IEnumerable<WebapplikasjonSemesterOppgave.Models.OrderEntity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductType)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ProductType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModelYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Warranty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceOrRepair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerAgreement)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.ReparationDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkingHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReplacedPartsReturned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingMethods)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType)
+            </td>
+            @*
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warranty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceOrRepair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerAgreement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReparationDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkingHours)
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ReplacedPartsReturned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingMethods)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>*@
+
+            <td class="text-center">
+                <div class="d-grid gap-2">
+                <a class="btn btn-warning col"asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-info col" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-danger col"asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

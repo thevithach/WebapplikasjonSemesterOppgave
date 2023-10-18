@@ -28,12 +28,17 @@
 
   <ItemGroup>
     <None Remove="Migrations\DBContextSample %28Identitet%29\" />
-    <None Remove="Views\Identity\" />
-    <None Remove="Views\Identity\Pages\" />
+    <None Remove="Views\AppRoles\" />
+    <None Remove="Areas\" />
+    <None Remove="Areas\Identity\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\DBContextSample %28Identitet%29\" />
-    <Folder Include="Views\Identity\" />
-    <Folder Include="Views\Identity\Pages\" />
+    <Folder Include="Views\AppRoles\" />
+    <Folder Include="Areas\" />
+    <Folder Include="Areas\Identity\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Home\SjekkListeElektriker.cshtml.cs" />
   </ItemGroup>
 </Project>
