@@ -1,8 +1,41 @@
-@*@model WebapplikasjonSemesterOppgave.Areas.Identity.Data.SampleUser*@
-
+@model List<UserWithRoleView>
 @{
     ViewData["Title"] = "Index";
 }
+
+
+
+<h1 class="custom-hover text-center">Brukeroversikt</h1>
+
+<table class="table table-responsive bg-opacity-75 bg-white">
+    <thead class="table-dark">
+    <tr class="">
+        <th>Bruker ID</th>
+        <th>Brukernavn</th>
+        <th>Email</th>
+        <th>Rolle</th>
+        <th>Handlinger</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var userWithRole in Model)
+    {
+        <tr>
+            <td>@userWithRole.User.Id</td>
+            <td>@userWithRole.User.UserName</td>
+            <td>@userWithRole.User.Email</td>
+            <td>@userWithRole.Role.Name</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@userWithRole.User.Id">Edit</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@userWithRole.User.Id">Details</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@userWithRole.User.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@*@model WebapplikasjonSemesterOppgave.Areas.Identity.Data.SampleUser*@
 
 @*<h1>Index</h1>
 
@@ -124,32 +157,3 @@
         }
     </tbody>
 </table>*@
-
-@model List<UserWithRoleView>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>User ID</th>
-                <th>User Name</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var userWithRole in Model)
-            {
-                <tr>
-                    <td>@userWithRole.User.Id</td>
-                    <td>@userWithRole.User.UserName</td>
-                    <td>@userWithRole.User.Email</td>
-                    <td>@userWithRole.Role.Name</td>
-                    <td>
-                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@userWithRole.User.Id">Edit</a>
-                        <a class="btn btn-info" asp-action="Details" asp-route-id="@userWithRole.User.Id">Details</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@userWithRole.User.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>

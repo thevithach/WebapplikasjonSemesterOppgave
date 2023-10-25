@@ -19,6 +19,8 @@ namespace WebapplikasjonSemesterOppgave.Data
         {
             _context = context;
         }
+        
+
         public IActionResult ServiceOrderDetails(int id)
         {
             var serviceOrder = _context.OrderEntity.Find(id);
@@ -32,9 +34,23 @@ namespace WebapplikasjonSemesterOppgave.Data
         // GET: Serviceorder
         public async Task<IActionResult> Index()
         {
-            var dBContextSample = _context.OrderEntity.Include(o => o.User);
-            return View(await dBContextSample.ToListAsync());
+            var orders = await _context.OrderEntity
+                .Include(o => o.ChecklistItems)
+                .Include(o => o.User) 
+                .ToListAsync();
+
+            return View(orders);
         }
+
+
+
+
+        // public async Task<IActionResult> Index()
+        // {
+        //     var dBContextSample = _context.OrderEntity.Include(o => o.User);
+        //     return View(await dBContextSample.ToListAsync());
+        // }
+        
 
         // GET: Serviceorder/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -64,51 +80,59 @@ namespace WebapplikasjonSemesterOppgave.Data
         [HttpPost]
         public async Task<IActionResult> Create(OrderEntity order)
         {
-            
-            // Save the order to the database
-            _context.OrderEntity.Add(order);
-            await _context.SaveChangesAsync();
-
-            var checklist = new ServiceChecklistEntity()
+            ModelState.Remove("User");
+            ModelState.Remove("ChecklistItems");
+            if (ModelState.IsValid)
             {
-                // Set the attributes of the checklist item
-                OrderId = order.Id,
+                // Save the order to the database
+                Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                _context.OrderEntity.Add(order);
+                await _context.SaveChangesAsync();
 
-                // Set the properties for the checklist items based on your form data or requirements
-                ClutchlamelerSlitasje = ChecklistItemCondition.OK,
-                Bremser = ChecklistItemCondition.Bør_Skiftes,
-                LagerforTrommel = ChecklistItemCondition.Defekt,
-               PTOogOpplagring = ChecklistItemCondition.OK,
-                Kjedestrammer = ChecklistItemCondition.OK,
-                Wire = ChecklistItemCondition.OK,
-                PinionLager = ChecklistItemCondition.OK,
-                KilepåKjedehjul = ChecklistItemCondition.OK,
-                //Hydraulikk
-                SylinderLekkasje = ChecklistItemCondition.OK,
-                SlangeSkadeLekkasje = ChecklistItemCondition.OK,
-                HydraulikkblokkTestbenk = ChecklistItemCondition.OK,
-                SkiftOljeiTank = ChecklistItemCondition.OK,
-                SkiftOljepåGirboks = ChecklistItemCondition.OK,
-                Ringsylinder = ChecklistItemCondition.OK,
-                Bremsesylinder = ChecklistItemCondition.OK,
-                //Elektriker
-                LedningsnettpåVinsj = ChecklistItemCondition.OK,
-                TestRadio = ChecklistItemCondition.OK,
-                Knappekasse = ChecklistItemCondition.OK,
-                XxBar = "",
-                VinsjKjørAlleFunksjoner = "",
-                TrekkraftKN = "",
-                BremsekraftKN = "",
-                // ... set other properties similarly
-            };
-            // Add the checklist item to the context
-            _context.ChecklistItems.Add(checklist);
+                var checklist = new ServiceChecklistEntity()
+                {
+                    // Set the attributes of the checklist item
+                    OrderId = order.Id,
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+                    // Set the properties for the checklist items based on your form data or requirements
+                    ClutchlamelerSlitasje = null,
+                    Bremser = null,
+                    LagerforTrommel = null,
+                    PTOogOpplagring = null,
+                    Kjedestrammer = null,
+                    Wire = null,
+                    PinionLager = null,
+                    KilepåKjedehjul = null,
+                    mechanicDone = null,
+                    //Hydraulikk
+                    SylinderLekkasje = null,
+                    SlangeSkadeLekkasje = null,
+                    HydraulikkblokkTestbenk = null,
+                    SkiftOljeiTank = null,
+                    SkiftOljepåGirboks = null,
+                    Ringsylinder = null,
+                    Bremsesylinder = null,
+                    hydraulicsDone = null,
+                    //Elektriker
+                    LedningsnettpåVinsj = null,
+                    TestRadio = null,
+                    Knappekasse = null,
+                    electricianDone = null,
+                    XxBar = "",
+                    VinsjKjørAlleFunksjoner = "",
+                    TrekkraftKN = "",
+                    BremsekraftKN = "",
+                    // ... set other properties similarly
+                };
+                // Add the checklist item to the context
+                _context.ChecklistItems.Add(checklist);
 
-         
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
 
+            }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
         }
 
 
@@ -136,7 +160,6 @@ namespace WebapplikasjonSemesterOppgave.Data
             {
                 return NotFound();
             }
-
             var orderEntity = await _context.OrderEntity.FindAsync(id);
             if (orderEntity == null)
             {
@@ -153,13 +176,16 @@ namespace WebapplikasjonSemesterOppgave.Data
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProductType,SerialNumber,ModelYear,Warranty,ServiceOrRepair,CustomerAgreement,ReparationDetails,WorkingHours,ReplacedPartsReturned,ShippingMethods,UserId")] OrderEntity orderEntity)
         {
+            ModelState.Remove("User");
+            ModelState.Remove("ChecklistItems");
+
             if (id != orderEntity.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
+            Response.Headers.Add("X-Content-Type-Options", "nosniff");
+             if (ModelState.IsValid)
+             {
                 try
                 {
                     _context.Update(orderEntity);
@@ -177,7 +203,7 @@ namespace WebapplikasjonSemesterOppgave.Data
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderEntity.UserId);
             return View(orderEntity);
         }

@@ -4,57 +4,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-white">Service Ordre Oversikt</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover border-dark bg-light bg-opacity-75">
     <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </th>
+                Fornavn
+                </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductType)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.ProductType)
-            </th>
+                Produkttype            
+                </th>
             <th>
-                @Html.DisplayNameFor(model => model.SerialNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModelYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Warranty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ServiceOrRepair)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerAgreement)
-            </th>*@
-            @*<th>
-                @Html.DisplayNameFor(model => model.ReparationDetails)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkingHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReplacedPartsReturned)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShippingMethods)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>*@
-            <th></th>
+                Ordre Status                
+                </th>
+            <th>Handlinger</th>
         </tr>
     </thead>
     <tbody>
@@ -69,38 +39,29 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductType)
             </td>
-            @*
-            <td>
-                @Html.DisplayFor(modelItem => item.SerialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Warranty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceOrRepair)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerAgreement)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReparationDetails)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkingHours)
-            </td>*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.ReplacedPartsReturned)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShippingMethods)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>*@
-
+             <td>
+                                <div class="progress">
+                                    @if (item.OrderStatus == ServiceOrderStatus.Under_behandling) {
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
+                                        <span class="text-dark">Under behandling</span>
+                                    }
+                                    else if (item.OrderStatus == ServiceOrderStatus.Hos_Mekaniker) {
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                        <span class="text-dark">Hos mekaniker</span>
+                                    }
+                                    else if (item.OrderStatus == ServiceOrderStatus.Hos_Hydraulikk) {
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                        <span class="text-dark">Hos hydraulikk</span>
+                                    }
+                                    else if (item.OrderStatus == ServiceOrderStatus.Hos_Elektriker) {
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                                        <span class="text-dark">Hos elektriker</span>
+                                    }
+                                    else if (item.OrderStatus == ServiceOrderStatus.Ferdig) {
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Ferdig</div>
+                                    }
+                                </div>
+                            </td>
             <td class="text-center">
                 <div class="d-grid gap-2">
                 <a class="btn btn-warning col"asp-action="Edit" asp-route-id="@item.Id">Edit</a>

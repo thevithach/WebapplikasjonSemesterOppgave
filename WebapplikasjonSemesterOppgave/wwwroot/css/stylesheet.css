@@ -1,4 +1,45 @@
 ﻿.clickable-div {
-    color: black;
+    color: #9CB7C2;
     text-decoration: none; /* Removes underline */
+}
+.clickable-div:hover {
+    /* Define your hover styles here */
+    color: darkorange; /* Change the text color when hovering */
+    /* Add any other styles you want for the hover effect */
+}
+.custom-hover {
+    color: #9CB7C2; /* Replace #your-color with your desired color code */
+}
+     /* Custom CSS for the hover effect */
+.navbar-nav .custom-hover:hover {
+    color: darkorange; /* Change the text color on hover */
+}
+.custom-bg-color {
+    background-color: rgb(16, 24, 32);
+}
+.navbar-brand.custom-hover {
+    color: #9CB7C2; /* Change to your desired color for the logo */
+}
+
+.navbar-brand.custom-hover:hover {
+    color: darkorange; /* Change to your desired hover color for the logo */
+}
+.green-background {
+    background-color: #00FF00; /* Green color */
+    color: red; /* Red text color */
+}
+
+.green-bg {
+    background-color: lightgreen !important;
+}
+
+.red-bg {
+    background-color: indianred !important;
+}
+.orange-bg {
+    background-color: #F4BB44 !important;
+}
+.large-Radio {
+    width: 30px;
+    height: 30px;
 }

@@ -352,6 +352,15 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                     b.Property<string>("XxBar")
                         .HasColumnType("longtext");
 
+                    b.Property<bool?>("electricianDone")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("hydraulicsDone")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("mechanicDone")
+                        .HasColumnType("tinyint(1)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");

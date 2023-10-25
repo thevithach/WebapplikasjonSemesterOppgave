@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Create";
 }
-
 <h1>Create</h1>
 
 <h4>ServiceChecklistEntity</h4>
@@ -52,6 +51,11 @@
                 <select asp-for="KilepåKjedehjul" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
                 <span asp-validation-for="KilepåKjedehjul" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="mechanicDone"/> @Html.DisplayNameFor(model => model.mechanicDone)
+                </label>
+                </div>
             <div class="form-group">
                 <label asp-for="SylinderLekkasje" class="control-label"></label>
                 <select asp-for="SylinderLekkasje" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
@@ -87,6 +91,11 @@
                 <select asp-for="Bremsesylinder" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
                 <span asp-validation-for="Bremsesylinder" class="text-danger"></span>
             </div>
+             <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="hydraulicsDone"/> @Html.DisplayNameFor(model => model.hydraulicsDone)
+                            </label>
+                            </div>
             <div class="form-group">
                 <label asp-for="LedningsnettpåVinsj" class="control-label"></label>
                 <select asp-for="LedningsnettpåVinsj" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
@@ -102,6 +111,11 @@
                 <select asp-for="Knappekasse" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
                 <span asp-validation-for="Knappekasse" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="electricianDone"/> @Html.DisplayNameFor(model => model.electricianDone)
+                </label>
+                </div>
             <div class="form-group">
                 <label asp-for="XxBar" class="control-label"></label>
                 <input asp-for="XxBar" class="form-control" />
