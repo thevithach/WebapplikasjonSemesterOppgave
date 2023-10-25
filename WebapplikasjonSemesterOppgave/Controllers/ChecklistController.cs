@@ -14,11 +14,10 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             _context = context;
         }
 
-        // GET
-        public IActionResult Index()
-        {
-            return View();
-        }
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
 
         public IActionResult ChecklistDetails(int id)
         {

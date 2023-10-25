@@ -6,6 +6,14 @@ using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
 
 namespace WebapplikasjonSemesterOppgave.Models
 {
+	public enum ServiceOrderStatus
+	{
+		Under_behandling,
+		Hos_Mekaniker,
+		Hos_Hydraulikk,
+		Hos_Elektriker,
+		Ferdig
+	}
 	public class OrderEntity
 	{
 		
@@ -26,6 +34,53 @@ namespace WebapplikasjonSemesterOppgave.Models
             public string UserId { get; set; }
             public SampleUser User { get; set; }
             public List<ServiceChecklistEntity> ChecklistItems { get; set; }
+            
+            public ServiceOrderStatus? OrderStatus
+            {
+	            get
+	            {
+		            if (ChecklistItems == null || !ChecklistItems.Any())
+		            {
+			            return ServiceOrderStatus.Under_behandling; // Or another default status.
+		            }
+
+		            bool allMechanicsDone = ChecklistItems.All(item => item?.mechanicDone == true);
+		            bool allHydraulicsDone = ChecklistItems.All(item => item?.hydraulicsDone == true);
+		            bool allElectriciansDone = ChecklistItems.All(item => item?.electricianDone == true);
+
+		            if (allMechanicsDone && allHydraulicsDone)
+		            {
+			            if (allElectriciansDone)
+			            {
+				            return ServiceOrderStatus.Ferdig;
+			            }
+			            return ServiceOrderStatus.Hos_Elektriker;
+		            }
+
+		            if (allMechanicsDone)
+		            {
+			            if (allHydraulicsDone)
+			            {
+				            return ServiceOrderStatus.Hos_Elektriker;
+			            }
+			            return ServiceOrderStatus.Hos_Hydraulikk;
+		            }
+
+		            if (!allMechanicsDone)
+		            {
+			            return ServiceOrderStatus.Hos_Mekaniker;
+		            }
+
+		            if (allHydraulicsDone)
+		            {
+			            return ServiceOrderStatus.Hos_Elektriker;
+		            }
+
+		            return ServiceOrderStatus.Under_behandling;
+	            }
+            }
+
+
 
     }
 	

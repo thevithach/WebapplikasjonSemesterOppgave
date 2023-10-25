@@ -3,21 +3,20 @@
 @model IEnumerable<IdentityRole>
 
 @{
-    ViewData["Title"] = "Application Roles";
+    ViewData["Title"] = "Applikasjon Roller";
 }
     
-<h1>View Roles</h1>
+<h1 class="custom-hover text-center" style="">Rolleoversikt</h1>
 <p>
-    <a asp-action="Create">Create Role</a>
+    <a asp-action="Create" class="btn btn-primary">Lag Rolle</a>
 </p>
 
-<table class="table">
-    <thead>
+<table class="table table-bordered border-dark bg-opacity-75 bg-white">
+    <thead class="table-dark">
         <tr>
             <th>@Html.DisplayNameFor(model => model.Id)</th>
 
             <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>

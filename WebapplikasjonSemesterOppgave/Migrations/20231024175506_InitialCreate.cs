@@ -255,6 +255,7 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                     Wire = table.Column<int>(type: "int", nullable: true),
                     PinionLager = table.Column<int>(type: "int", nullable: true),
                     KilepåKjedehjul = table.Column<int>(type: "int", nullable: true),
+                    mechanicDone = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     SylinderLekkasje = table.Column<int>(type: "int", nullable: true),
                     SlangeSkadeLekkasje = table.Column<int>(type: "int", nullable: true),
                     HydraulikkblokkTestbenk = table.Column<int>(type: "int", nullable: true),
@@ -262,9 +263,11 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                     SkiftOljepåGirboks = table.Column<int>(type: "int", nullable: true),
                     Ringsylinder = table.Column<int>(type: "int", nullable: true),
                     Bremsesylinder = table.Column<int>(type: "int", nullable: true),
+                    hydraulicsDone = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     LedningsnettpåVinsj = table.Column<int>(type: "int", nullable: true),
                     TestRadio = table.Column<int>(type: "int", nullable: true),
                     Knappekasse = table.Column<int>(type: "int", nullable: true),
+                    electricianDone = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     XxBar = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     VinsjKjørAlleFunksjoner = table.Column<string>(type: "longtext", nullable: true)

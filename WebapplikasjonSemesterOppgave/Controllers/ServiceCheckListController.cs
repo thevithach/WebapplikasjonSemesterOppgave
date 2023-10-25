@@ -18,13 +18,70 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         {
             _context = context;
         }
+        public string CalculateOrderStatus(int orderId)
+        {
+            var checklistItems = _context.ChecklistItems.Where(item => item.OrderId == orderId).ToList();
 
+            // Initialize flags to track the overall completion status for each role
+            bool allMechanicsDone = true;
+            bool allHydraulicsDone = true;
+            bool allElectriciansDone = true;
+
+            foreach (var item in checklistItems)
+            {
+                // Check if the mechanic has completed their part
+                if (item.mechanicDone != true)
+                {
+                    allMechanicsDone = false;
+                }
+
+                // Check if the hydraulics have completed their part
+                if (item.hydraulicsDone != true)
+                {
+                    allHydraulicsDone = false;
+                }
+
+                // Check if the electrician has completed their part
+                if (item.electricianDone != true)
+                {
+                    allElectriciansDone = false;
+                }
+            }
+
+            if (allMechanicsDone && allHydraulicsDone && allElectriciansDone)
+            {
+                return "Ferdig";
+            }
+            if (allMechanicsDone)
+            {
+                return "Venter på hydraulikk og Elektriker";
+            }
+
+            return "Under_behandling";
+        }
         // GET: ServiceCheckList
         public async Task<IActionResult> Index()
         {
-            var dBContextSample = _context.ChecklistItems.Include(s => s.Order);
-            return View(await dBContextSample.ToListAsync());
+            var checklistItems = await _context.ChecklistItems
+                .Include(s => s.Order)
+                .ToListAsync();
+
+            var orderStatusList = new List<string>();
+
+            foreach (var item in checklistItems)
+            {
+                // Calculate the order status for each checklist item and add it to the list
+                string orderStatus = CalculateOrderStatus(item.OrderId);
+                orderStatusList.Add(orderStatus);
+            }
+
+            // Pass the checklist items and order statuses to the view
+            ViewBag.ChecklistItems = checklistItems;
+            ViewBag.OrderStatusList = orderStatusList;
+
+            return View();
         }
+
 
         // GET: ServiceCheckList/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -59,14 +116,17 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClutchlamelerSlitasje,Bremser,LagerforTrommel,PTOogOpplagring,Kjedestrammer,Wire,PinionLager,KilepåKjedehjul,SylinderLekkasje,SlangeSkadeLekkasje,HydraulikkblokkTestbenk,SkiftOljeiTank,SkiftOljepåGirboks,Ringsylinder,Bremsesylinder,LedningsnettpåVinsj,TestRadio,Knappekasse,XxBar,VinsjKjørAlleFunksjoner,TrekkraftKN,BremsekraftKN,OrderId")] ServiceChecklistEntity serviceChecklistEntity)
         {
-            // if (ModelState.IsValid)
-            // {
+            ModelState.Remove("Order");
+             if (ModelState.IsValid)
+             {
+            
                 _context.Add(serviceChecklistEntity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            // }
-            //ViewData["OrderId"] = new SelectList(_context.OrderEntity, "Id", "Id", serviceChecklistEntity.OrderId);
-            //return View(serviceChecklistEntity);
+             }
+
+             ViewData["OrderId"] = new SelectList(_context.OrderEntity, "Id", "Id", serviceChecklistEntity.OrderId);
+             return View(serviceChecklistEntity);
         }
 
         // GET: ServiceCheckList/Edit/5
@@ -82,6 +142,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             {
                 return NotFound();
             }
+            
             ViewData["OrderId"] = new SelectList(_context.OrderEntity, "Id", "Id", serviceChecklistEntity.OrderId);
             return View(serviceChecklistEntity);
         }
@@ -91,35 +152,37 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClutchlamelerSlitasje,Bremser,LagerforTrommel,PTOogOpplagring,Kjedestrammer,Wire,PinionLager,KilepåKjedehjul,SylinderLekkasje,SlangeSkadeLekkasje,HydraulikkblokkTestbenk,SkiftOljeiTank,SkiftOljepåGirboks,Ringsylinder,Bremsesylinder,LedningsnettpåVinsj,TestRadio,Knappekasse,XxBar,VinsjKjørAlleFunksjoner,TrekkraftKN,BremsekraftKN,OrderId")] ServiceChecklistEntity serviceChecklistEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClutchlamelerSlitasje,Bremser,LagerforTrommel,PTOogOpplagring,Kjedestrammer,Wire,PinionLager,KilepåKjedehjul,mechanicDone,SylinderLekkasje,SlangeSkadeLekkasje,HydraulikkblokkTestbenk,SkiftOljeiTank,SkiftOljepåGirboks,Ringsylinder,Bremsesylinder,hydraulicsDone,LedningsnettpåVinsj,TestRadio,Knappekasse,electricianDone,XxBar,VinsjKjørAlleFunksjoner,TrekkraftKN,BremsekraftKN,OrderId")] ServiceChecklistEntity serviceChecklistEntity)
         {
             if (id != serviceChecklistEntity.Id)
             {
                 return NotFound();
             }
+            try
+            {
+                // Update your model state for "orderID" instead of "order"
+                if (ModelState.ContainsKey("OrderId"))
+                {
+                    ModelState["orderID"].Errors.Clear();
+                }
 
-            
-                try
+                _context.Update(serviceChecklistEntity);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ServiceChecklistEntityExists(serviceChecklistEntity.Id))
                 {
-                    _context.Update(serviceChecklistEntity);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ServiceChecklistEntityExists(serviceChecklistEntity.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
-            
-            // ViewData["OrderId"] = new SelectList(_context.OrderEntity, "Id", "Id", serviceChecklistEntity.OrderId);
-            // return View(serviceChecklistEntity);
+            }
+            return RedirectToAction("Index", "ServiceOrder");
         }
+
 
         // GET: ServiceCheckList/Delete/5
         public async Task<IActionResult> Delete(int? id)

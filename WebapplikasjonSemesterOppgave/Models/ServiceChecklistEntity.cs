@@ -23,6 +23,7 @@ public class ServiceChecklistEntity
         public ChecklistItemCondition? Wire { get; set; }
         public ChecklistItemCondition? PinionLager { get; set; }
         public ChecklistItemCondition? KilepåKjedehjul { get; set; }
+        public bool? mechanicDone { get; set; }
         //Hydraulikk
         public ChecklistItemCondition? SylinderLekkasje { get; set; }
         public ChecklistItemCondition? SlangeSkadeLekkasje { get; set; }
@@ -31,10 +32,12 @@ public class ServiceChecklistEntity
         public ChecklistItemCondition? SkiftOljepåGirboks { get; set; }
         public ChecklistItemCondition? Ringsylinder { get; set; }
         public ChecklistItemCondition? Bremsesylinder { get; set; }
+        public bool? hydraulicsDone { get; set; }
         //Elektriker
         public ChecklistItemCondition? LedningsnettpåVinsj{ get; set; }
         public ChecklistItemCondition? TestRadio { get; set; }
         public ChecklistItemCondition? Knappekasse { get; set; }
+        public bool? electricianDone { get; set; }
         //Trykksettinger
         public string? XxBar {get; set;}
         public string? VinsjKjørAlleFunksjoner { get; set; }

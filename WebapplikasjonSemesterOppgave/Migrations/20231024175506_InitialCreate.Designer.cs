@@ -11,7 +11,7 @@ using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
 namespace WebapplikasjonSemesterOppgave.Migrations
 {
     [DbContext(typeof(DBContextSample))]
-    [Migration("20231018183337_InitialCreate")]
+    [Migration("20231024175506_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -354,6 +354,15 @@ namespace WebapplikasjonSemesterOppgave.Migrations
 
                     b.Property<string>("XxBar")
                         .HasColumnType("longtext");
+
+                    b.Property<bool?>("electricianDone")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("hydraulicsDone")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("mechanicDone")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

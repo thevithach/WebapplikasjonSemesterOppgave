@@ -2,73 +2,84 @@
 
 @{
     ViewData["Title"] = "Edit";
+
 }
 
-<h1>Edit</h1>
+<h1 class="custom-hover">Edit</h1>
 
-<h4>ServiceChecklistEntity</h4>
+<h4 class="custom-hover">ServiceChecklistEntity</h4>
 <hr />
 
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-        <table class="table table-striped table-hover table-bordered text-center">
-                <thead class="table-dark">
-                <tr>
-                    <th>Sjekkpunkter</th>
-                    <th>OK</th>
-                    <th>Bør skiftes</th>
-                    <th>Defekt</th>
-                </tr>
-                </thead>
+        <table class="table table-striped table-hover table-bordered text-center bg-white bg-opacity-75">
+            <thead class="table-dark">
+            <tr>
+                <th style="width: auto;">Sjekkpunkter</th>
+                <th style="width: 15%;"> OK</th>
+                <th style="width: 15%;">Bør skiftes</th>
+                <th style="width: 15%;">Defekt</th>
+            </tr>
+            </thead>
+            <thead>
+            <tr class="text-center table-success">
+                <th colspan="4">Mekaniker</th>
+            </tr>
+            </thead>
                 <tr>
                     <td>Sjekk clutch lameller slitasje</td>
-                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="OK" /> OK</td>
-                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Bør_skiftes" /> Bør skiftes</td>
-                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Defekt" /> Defekt</td>
+                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="OK" class="large-Radio"/> </td>
+                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Bør_skiftes" class="large-Radio"/> </td>
+                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Defekt" class="large-Radio"/> </td>
 
                 </tr>
                 <tr>
                     <td>Sjekk bremser. Bånd/Pal</td>
-                    <td><input type="radio" asp-for="Bremser" value="OK" /> OK</td>
-                    <td><input type="radio" asp-for="Bremser" value="Bør_skiftes" /> Bør skiftes</td>
-                    <td><input type="radio" asp-for="Bremser" value="Defekt" /> Defekt</td>
+                    <td><input type="radio" asp-for="Bremser" value="OK" class="large-Radio"/> </td>
+                    <td><input type="radio" asp-for="Bremser" value="Bør_skiftes" class="large-Radio"/> </td>
+                    <td><input type="radio" asp-for="Bremser" value="Defekt" class="large-Radio"/> </td>
                 </tr>
                 <tr>
                     <td>Sjekk lager for trommel</td>
-                    <td><input type="radio" asp-for="LagerforTrommel" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="LagerforTrommel" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="LagerforTrommel" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="LagerforTrommel" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="LagerforTrommel" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="LagerforTrommel" value="Defekt" class="large-Radio"/> </td>
                 </tr>
                 <tr>
                     <td>Sjekk PTO og opplagring</td>
-                    <td><input type="radio" asp-for="PTOogOpplagring" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="PTOogOpplagring" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="PTOogOpplagring" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="PTOogOpplagring" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="PTOogOpplagring" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="PTOogOpplagring" value="Defekt" class="large-Radio"/> </td>
                 </tr>
                 <tr>
                     <td>Sjekk kjedestrammer</td>
-                    <td><input type="radio" asp-for="Kjedestrammer" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="Kjedestrammer" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="Kjedestrammer" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="Kjedestrammer" value="OK" class="large-Radio"/> </td>
+                    <td><input type="radio" asp-for="Kjedestrammer" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="Kjedestrammer" value="Defekt" class="large-Radio"/> </td>
                 </tr>
                 <tr>
                     <td>Sjekk wire</td>
-                    <td><input type="radio" asp-for="Wire" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="Wire" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="Wire" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="Wire" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="Wire" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="Wire" value="Defekt" class="large-Radio"/></td>
                 </tr>
                 <tr>
                     <td>Sjekk pinion lager</td>
-                    <td><input type="radio" asp-for="PinionLager" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="PinionLager" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="PinionLager" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="PinionLager" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="PinionLager" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="PinionLager" value="Defekt" class="large-Radio"/></td>
                 </tr>
                 <tr>
                     <td>Sjekk kile på kjedehjul</td>
-                    <td><input type="radio" asp-for="KilepåKjedehjul" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="KilepåKjedehjul" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="KilepåKjedehjul" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="KilepåKjedehjul" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="KilepåKjedehjul" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="KilepåKjedehjul" value="Defekt" class="large-Radio"/></td>
+                </tr>
+                <tr>
+                    <td>Fullført mekaniker liste?</td>
+                    <td colspan="2"><input type="radio" asp-for="mechanicDone" value="true" class="large-Radio"/><span>JA</span></td>
+                    <td><input type="radio" asp-for="mechanicDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
                 </tr>
                 @* Hydraulisk *@
                 <thead class="table table-success table-striped">
@@ -78,49 +89,54 @@
                 </thead>
                 <tr>
                     <td>Sjekk hydraulikk sylinder for lekkasje</td>
-                    <td><input type="radio" asp-for="SylinderLekkasje" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="SylinderLekkasje" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="SylinderLekkasje" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="SylinderLekkasje" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SylinderLekkasje" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SylinderLekkasje" value="Defekt" class="large-Radio"/></td>
                 </tr>
                 <tr>
                     <td>Sjekk slanger for skader og lekkasje</td>
-                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Defekt" class="large-Radio"/></td>
                 </tr>
                 <tr>
                     <td>Test hydraulikkblokk i testbenk</td>
-                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Defekt" class="large-Radio"/></td>
                 </tr>
                 <tr>
                     <td>Skift olje i tank</td>
-                    <td><input type="radio" asp-for="SkiftOljeiTank" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="SkiftOljeiTank" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="SkiftOljeiTank" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="SkiftOljeiTank" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SkiftOljeiTank" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SkiftOljeiTank" value="Defekt" class="large-Radio"/></td>
                 </tr>
         
                 <tr>
                     <td>Skift olje på gir boks</td>
-                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Defekt" class="large-Radio"/></td>
                 </tr>
         
                 <tr>
                     <td>Sjekk ringsylinder åpne og skift tetninger</td>
-                    <td><input type="radio" asp-for="Ringsylinder" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="Ringsylinder" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="Ringsylinder" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="Ringsylinder" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="Ringsylinder" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="Ringsylinder" value="Defekt" class="large-Radio"/></td>
                 </tr>
-                <tr>
-                    <td>Sjekk bremse sylinder åpne og skift tetninger</td>
-                    <td><input type="radio" asp-for="Bremsesylinder" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="Bremsesylinder" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="Bremsesylinder" value="Defekt"/> Defekt</td>
-                </tr>
-                        @* Hydraulisk *@
+            <tr>
+                <td>Sjekk bremse sylinder åpne og skift tetninger</td>
+                <td><input type="radio" asp-for="Bremsesylinder" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Bremsesylinder" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Bremsesylinder" value="Defekt" class="large-Radio"/> </td>
+            </tr>
+            <tr>
+                <td>Fullført hydraulikk liste?</td>
+                <td colspan="2"><input type="radio" asp-for="hydraulicsDone" value="true" class="large-Radio"/><span>JA</span></td>
+                <td><input type="radio" asp-for="hydraulicsDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
+            </tr>
+                        @* Elektro *@
                 <thead class="table table-success table-striped">
                 <tr class="text-center">
                     <th colspan="4">Elektro</th>
@@ -128,56 +144,63 @@
                 </thead>
                 <tr>
                     <td>Sjekk ledningsnett på vinsj</td>
-                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Defekt" class="large-Radio"/></td>
                 </tr>
                 
                         
                 <tr>
                     <td>Sjekk og test radio</td>
-                    <td><input type="radio" asp-for="TestRadio" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="TestRadio" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="TestRadio" value="Defekt"/> Defekt</td>
+                    <td><input type="radio" asp-for="TestRadio" value="OK" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="TestRadio" value="Bør_skiftes" class="large-Radio"/></td>
+                    <td><input type="radio" asp-for="TestRadio" value="Defekt" class="large-Radio"/></td>
                 </tr>
                 
-                <tr>
-                    <td>Sjekk og test knappekasse</td>
-                    <td><input type="radio" asp-for="Knappekasse" value="OK"/> OK</td>
-                    <td><input type="radio" asp-for="Knappekasse" value="Bør_skiftes"/> Bør skiftes</td>
-                    <td><input type="radio" asp-for="Knappekasse" value="Defekt"/> Defekt</td>
+            <tr>
+                <td>Sjekk og test knappekasse</td>
+                <td><input type="radio" asp-for="Knappekasse" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Knappekasse" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Knappekasse" value="Defekt" class="large-Radio"/> </td>
+            </tr>
+            <tr>
+                <td>Fullført elektro liste?</td>
+                <td colspan="2"><input type="radio" asp-for="electricianDone" value="true" class="large-Radio"/><span>JA</span></td>
+                <td><input type="radio" asp-for="electricianDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
+                
                 </tr>
             <div asp-validation-summary="All"></div>
         </table>
-            <div class="form-group">
+            <div class="form-group bg-white bg-opacity-75">
                             <label asp-for="XxBar" class="control-label"></label>
                             <input asp-for="XxBar" class="form-control" />
                             <span asp-validation-for="XxBar" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group bg-white bg-opacity-75">
                             <label asp-for="VinsjKjørAlleFunksjoner" class="control-label"></label>
                             <input asp-for="VinsjKjørAlleFunksjoner" class="form-control" />
                             <span asp-validation-for="VinsjKjørAlleFunksjoner" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group bg-white bg-opacity-75">
                             <label asp-for="TrekkraftKN" class="control-label"></label>
                             <input asp-for="TrekkraftKN" class="form-control" />
                             <span asp-validation-for="TrekkraftKN" class="text-danger"></span>
                         </div>
-            <div class="form-group">
+            <div class="form-group bg-white bg-opacity-75">
                 <label asp-for="BremsekraftKN" class="control-label"></label>
                 <input asp-for="BremsekraftKN" class="form-control" />
                 <span asp-validation-for="BremsekraftKN" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group bg-white bg-opacity-75">
                             <label asp-for="OrderId" class="control-label"></label>
                             <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
                             <span asp-validation-for="OrderId" class="text-danger"></span>
                         </div>
-            <div class="form-group">
+            <div class="form-group bg-white bg-opacity-75">
                                   <input type="submit" value="Save" class="btn btn-primary" />
                               </div>
         </form>
+        
 
 <div>
     <a class="btn btn-light"asp-action="Index">Back to List</a>

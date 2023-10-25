@@ -4,63 +4,66 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>OrderEntity</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center">
+
+
+    <div class="col-md-4 bg-white bg-opacity-75">    
+        <h1 class="text-center">Edit</h1>
+        <h4 class="text-center">OrderEntity</h4>
+        <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Id"/>
             <div class="form-group">
                 <label asp-for="ProductType" class="control-label"></label>
-                <input asp-for="ProductType" class="form-control" />
+                <input asp-for="ProductType" class="form-control"/>
                 <span asp-validation-for="ProductType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SerialNumber" class="control-label"></label>
-                <input asp-for="SerialNumber" class="form-control" />
+                <input asp-for="SerialNumber" class="form-control"/>
                 <span asp-validation-for="SerialNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ModelYear" class="control-label"></label>
-                <input asp-for="ModelYear" class="form-control" />
+                <input asp-for="ModelYear" class="form-control"/>
                 <span asp-validation-for="ModelYear" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Warranty" /> @Html.DisplayNameFor(model => model.Warranty)
+                    <input class="form-check-input" asp-for="Warranty"/> @Html.DisplayNameFor(model => model.Warranty)
                 </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ServiceOrRepair" /> @Html.DisplayNameFor(model => model.ServiceOrRepair)
+                    <input class="form-check-input" asp-for="ServiceOrRepair"/> @Html.DisplayNameFor(model => model.ServiceOrRepair)
                 </label>
             </div>
             <div class="form-group">
                 <label asp-for="CustomerAgreement" class="control-label"></label>
-                <input asp-for="CustomerAgreement" class="form-control" />
+                <input asp-for="CustomerAgreement" class="form-control"/>
                 <span asp-validation-for="CustomerAgreement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReparationDetails" class="control-label"></label>
-                <input asp-for="ReparationDetails" class="form-control" />
+                <input asp-for="ReparationDetails" class="form-control"/>
                 <span asp-validation-for="ReparationDetails" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="WorkingHours" class="control-label"></label>
-                <input asp-for="WorkingHours" class="form-control" />
+                <input asp-for="WorkingHours" class="form-control"/>
                 <span asp-validation-for="WorkingHours" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReplacedPartsReturned" class="control-label"></label>
-                <input asp-for="ReplacedPartsReturned" class="form-control" />
+                <input asp-for="ReplacedPartsReturned" class="form-control"/>
                 <span asp-validation-for="ReplacedPartsReturned" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ShippingMethods" class="control-label"></label>
-                <input asp-for="ShippingMethods" class="form-control" />
+                <input asp-for="ShippingMethods" class="form-control"/>
                 <span asp-validation-for="ShippingMethods" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -68,16 +71,18 @@
                 <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group text-center">
+                <input type="submit" value="Save" class="btn btn-primary mt-2"/>
             </div>
+            <div class="text-center">
+                <a asp-action="Index" class="btn btn-secondary mb-2">Back to List</a>
+            </div>
+            <div asp-validation-summary="All"></div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
