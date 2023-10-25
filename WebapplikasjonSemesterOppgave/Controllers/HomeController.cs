@@ -40,6 +40,11 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         {
             return View();
         }
+
+        public IActionResult Raport()
+        {
+            return View();
+        }
         public IActionResult SjekkListeElektriker()
         {
             var itemList = new List<HomeEntity>
