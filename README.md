@@ -1,4 +1,5 @@
 # WebapplikasjonSemesterOppgave
+NB! : Må legge til rolle for å kunne registrere. 
 
 Kjør i terminal: 
 docker pull mariadb
