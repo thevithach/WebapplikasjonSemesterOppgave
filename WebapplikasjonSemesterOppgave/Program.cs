@@ -8,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DBContextSampleConnection' not found.");
 
 builder.Services.AddDbContext<DBContextSample>(options =>
-options.UseMySql(connectionString, new MySqlServerVersion(new Version(11, 1, 2))));
+options.UseMySql(connectionString, ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseMySql(connectionString, new MySqlServerVersion(new Version(11, 1, 2))));
+options.UseMySql(connectionString, ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 
 
