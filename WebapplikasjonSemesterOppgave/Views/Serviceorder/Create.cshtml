@@ -5,47 +5,96 @@
 }
 
 
-<div class="row">
-    <div class="col-md-4 bg-opacity-75 bg-white">
-        <h1>Create</h1>
-        
-        <h4>OrderEntity</h4>
+<div class="row justify-content-center">
+    <div class="col-md-6 bg-white bg-opacity-75 border border-2 rounded">    
+        <h1 class="text-center">Opprett Ordre</h1>
         <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label asp-for="OrderCreatedDate" class="control-label"></label>
+                    <input asp-for="OrderCreatedDate" class="form-control"/>
+                    <span asp-validation-for="OrderCreatedDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="OrderPlacerCustomer" class="control-label"></label>
+                    <input asp-for="OrderPlacerCustomer" class="form-control"/>
+                    <span asp-validation-for="OrderPlacerCustomer" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label asp-for="ProductReceivedDate" class="control-label"></label>
+                    <input asp-for="ProductReceivedDate" class="form-control"/>
+                    <span asp-validation-for="ProductReceivedDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="ProductAgreedCompletionDate" class="control-label"></label>
+                    <input asp-for="ProductAgreedCompletionDate" class="form-control"/>
+                    <span asp-validation-for="ProductAgreedCompletionDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 form-group">
                 <label asp-for="ProductType" class="control-label"></label>
                 <input asp-for="ProductType" class="form-control"/>
                 <span asp-validation-for="ProductType" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-6 form-group">
                 <label asp-for="SerialNumber" class="control-label"></label>
                 <input asp-for="SerialNumber" class="form-control"/>
                 <span asp-validation-for="SerialNumber" class="text-danger"></span>
+            </div>
             </div>
             <div class="form-group">
                 <label asp-for="ModelYear" class="control-label"></label>
                 <input asp-for="ModelYear" class="form-control"/>
                 <span asp-validation-for="ModelYear" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Warranty"/> @Html.DisplayNameFor(model => model.Warranty)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ServiceOrRepair"/> @Html.DisplayNameFor(model => model.ServiceOrRepair)
-                </label>
-            </div>
+            <div class="row"> <!-- Row for radio button groups -->
+                                       <!-- Warranty Field -->
+                <div class="col-md-6 mt-2">
+                                           
+                    <div class="form-group">
+                        <label class="control-label">@Html.DisplayNameFor(model => model.Warranty)</label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="Warranty" value="True" class="form-check-input"
+                                   asp-for="Warranty"/>
+                            <label class="form-check-label">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="Warranty" value="False" class="form-check-input" asp-for="Warranty"/>
+                            <label class="form-check-label">Nei</label>
+                        </div>
+                        <span asp-validation-for="Warranty" class="text-danger"></span>
+                    </div>
+                    </div><!-- ServiceOrRepair Field -->
+                <div class="col-md-6 mt-2">
+                    <div class="form-group">
+                        <label class="control-label">@Html.DisplayNameFor(model => model.ServiceOrRepair)</label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="ServiceOrRepair" value="True" class="form-check-input"
+                                   asp-for="ServiceOrRepair"/>
+                            <label class="form-check-label">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="ServiceOrRepair" value="False" class="form-check-input"
+                                   asp-for="ServiceOrRepair"/>
+                            <label class="form-check-label">Nei</label>
+                        </div>
+                        <span asp-validation-for="ServiceOrRepair" class="text-danger"></span>
+                    </div>
+                    </div>
+                </div>
             <div class="form-group">
                 <label asp-for="CustomerAgreement" class="control-label"></label>
-                <input asp-for="CustomerAgreement" class="form-control"/>
+                <textarea asp-for="CustomerAgreement" class="form-control"></textarea>
                 <span asp-validation-for="CustomerAgreement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReparationDetails" class="control-label"></label>
-                <input asp-for="ReparationDetails" class="form-control"/>
+                <textarea asp-for="ReparationDetails" class="form-control"></textarea>
                 <span asp-validation-for="ReparationDetails" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -68,11 +117,9 @@
                 <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
             </div>
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary"/>
-                        </div>
-            <div>
-             <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            <div class="form-group text-center mb-2">
+                <input type="submit" value="Create" class="btn btn-primary" style="width: 71%;"/>
+                <a asp-action="Index" class="btn btn-secondary" style="width: 28%">Back to List</a>
             </div>
             
             

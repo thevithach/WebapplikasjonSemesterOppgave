@@ -4,299 +4,345 @@
     ViewData["Title"] = "Edit";
 
 }
-
+@functions {
+    string GetRowColor(ChecklistItemCondition? condition) {
+        if (condition == ChecklistItemCondition.OK) {
+            return "green-bg";
+        }
+        else if (condition == ChecklistItemCondition.Bør_Skiftes) {
+            return "orange-bg";
+        }
+        else if (condition == ChecklistItemCondition.Defekt) {
+            return "red-bg";
+        }
+        return ""; 
+    }
+}
+@functions
+{
+    string GetRowColorByBoolean(bool? condition)
+    {
+        if (condition == true)
+        {
+            return "green-bg";
+        }
+        else if (condition == false)
+        {
+            return "red-bg";
+        }
+        return ""; 
+    }
+}
+                  
 <h1 class="custom-hover">Edit</h1>
-
+                    
 <h4 class="custom-hover">ServiceChecklistEntity</h4>
 <hr />
 
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-        <table class="table table-striped table-hover table-bordered text-center bg-white bg-opacity-75">
-            <thead class="table-dark">
-            <tr>
-                <th style="width: auto;">Sjekkpunkter</th>
-                <th style="width: 15%;"> OK</th>
-                <th style="width: 15%;">Bør skiftes</th>
-                <th style="width: 15%;">Defekt</th>
-            </tr>
-            </thead>
-            <thead>
-            <tr class="text-center table-success">
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <table class="table table-striped table-hover table-bordered text-center border-dark bg-white bg-opacity-75">
+        <thead class="table-dark">
+        <tr>
+            <th style="width: auto;">Sjekkpunkter</th>
+            <th style="width: 15%;"> OK</th>
+            <th style="width: 15%;">Bør skiftes</th>
+            <th style="width: 15%;">Defekt</th>
+        </tr>
+        </thead>
+        @if (User.IsInRole("Mekaniker") || User.IsInRole("Admin"))
+        {
+            <thead class="table table-striped table-bordered border-dark" id="Mekaniker">
+            <tr class="text-center mekaniker-header">
                 <th colspan="4">Mekaniker</th>
             </tr>
             </thead>
-                <tr>
-                    <td>Sjekk clutch lameller slitasje</td>
-                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="OK" class="large-Radio"/> </td>
-                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Bør_skiftes" class="large-Radio"/> </td>
-                    <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Defekt" class="large-Radio"/> </td>
+            <tr class="@GetRowColor(Model.ClutchlamelerSlitasje) checklist-row mekaniker">
+                <td>Sjekk clutch lameller slitasje</td>
+                <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="OK" class="large-Radio"/> </td>
+                <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Bør_skiftes" class="large-Radio"/> </td>
+                <td><input type="radio" asp-for="ClutchlamelerSlitasje" value="Defekt" class="large-Radio"/> </td>
 
-                </tr>
-                <tr>
-                    <td>Sjekk bremser. Bånd/Pal</td>
-                    <td><input type="radio" asp-for="Bremser" value="OK" class="large-Radio"/> </td>
-                    <td><input type="radio" asp-for="Bremser" value="Bør_skiftes" class="large-Radio"/> </td>
-                    <td><input type="radio" asp-for="Bremser" value="Defekt" class="large-Radio"/> </td>
-                </tr>
-                <tr>
-                    <td>Sjekk lager for trommel</td>
-                    <td><input type="radio" asp-for="LagerforTrommel" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="LagerforTrommel" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="LagerforTrommel" value="Defekt" class="large-Radio"/> </td>
-                </tr>
-                <tr>
-                    <td>Sjekk PTO og opplagring</td>
-                    <td><input type="radio" asp-for="PTOogOpplagring" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="PTOogOpplagring" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="PTOogOpplagring" value="Defekt" class="large-Radio"/> </td>
-                </tr>
-                <tr>
-                    <td>Sjekk kjedestrammer</td>
-                    <td><input type="radio" asp-for="Kjedestrammer" value="OK" class="large-Radio"/> </td>
-                    <td><input type="radio" asp-for="Kjedestrammer" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="Kjedestrammer" value="Defekt" class="large-Radio"/> </td>
-                </tr>
-                <tr>
-                    <td>Sjekk wire</td>
-                    <td><input type="radio" asp-for="Wire" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="Wire" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="Wire" value="Defekt" class="large-Radio"/></td>
-                </tr>
-                <tr>
-                    <td>Sjekk pinion lager</td>
-                    <td><input type="radio" asp-for="PinionLager" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="PinionLager" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="PinionLager" value="Defekt" class="large-Radio"/></td>
-                </tr>
-                <tr>
-                    <td>Sjekk kile på kjedehjul</td>
-                    <td><input type="radio" asp-for="KilepåKjedehjul" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="KilepåKjedehjul" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="KilepåKjedehjul" value="Defekt" class="large-Radio"/></td>
-                </tr>
-                <tr>
-                    <td>Fullført mekaniker liste?</td>
-                    <td colspan="2"><input type="radio" asp-for="mechanicDone" value="true" class="large-Radio"/><span>JA</span></td>
-                    <td><input type="radio" asp-for="mechanicDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
-                </tr>
+            </tr>
+            <tr class="@GetRowColor(Model.Bremser) checklist-row mekaniker">
+                <td>Sjekk bremser. Bånd/Pal</td>
+                <td><input type="radio" asp-for="Bremser" value="OK" class="large-Radio"/> </td>
+                <td><input type="radio" asp-for="Bremser" value="Bør_skiftes" class="large-Radio"/> </td>
+                <td><input type="radio" asp-for="Bremser" value="Defekt" class="large-Radio"/> </td>
+            </tr>
+            <tr class="@GetRowColor(Model.LagerforTrommel) checklist-row mekaniker">
+                <td>Sjekk lager for trommel</td>
+                <td><input type="radio" asp-for="LagerforTrommel" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="LagerforTrommel" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="LagerforTrommel" value="Defekt" class="large-Radio"/> </td>
+            </tr>
+            <tr class="@GetRowColor(Model.PTOogOpplagring) checklist-row mekaniker">
+                <td>Sjekk PTO og opplagring</td>
+                <td><input type="radio" asp-for="PTOogOpplagring" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="PTOogOpplagring" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="PTOogOpplagring" value="Defekt" class="large-Radio"/> </td>
+            </tr>
+            <tr class="@GetRowColor(Model.Kjedestrammer) checklist-row mekaniker">
+                <td>Sjekk kjedestrammer</td>
+                <td><input type="radio" asp-for="Kjedestrammer" value="OK" class="large-Radio"/> </td>
+                <td><input type="radio" asp-for="Kjedestrammer" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Kjedestrammer" value="Defekt" class="large-Radio"/> </td>
+            </tr>
+            <tr class="@GetRowColor(Model.Wire) checklist-row mekaniker">
+                <td>Sjekk wire</td>
+                <td><input type="radio" asp-for="Wire" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Wire" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Wire" value="Defekt" class="large-Radio"/></td>
+            </tr>
+            <tr class="@GetRowColor(Model.PinionLager) checklist-row mekaniker">
+                <td>Sjekk pinion lager</td>
+                <td><input type="radio" asp-for="PinionLager" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="PinionLager" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="PinionLager" value="Defekt" class="large-Radio"/></td>
+            </tr>
+            <tr class="@GetRowColor(Model.KilepåKjedehjul) checklist-row mekaniker">
+                <td>Sjekk kile på kjedehjul</td>
+                <td><input type="radio" asp-for="KilepåKjedehjul" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="KilepåKjedehjul" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="KilepåKjedehjul" value="Defekt" class="large-Radio"/></td>
+            </tr>
+            <tr class="@GetRowColorByBoolean(Model.mechanicDone) checklist-row mekaniker">
+                <td>Fullført mekaniker liste?</td>
+                <td colspan="2"><input type="radio" asp-for="mechanicDone" value=true class="large-Radio"/><span>JA</span></td>
+                <td><input type="radio" id="mechanicDone" asp-for="mechanicDone" value=false class="large-Radio"/><span class="mb-5">NEI</span></td>
+            </tr>
+            <partial name="EditHiddenInputs"/>
+        }
+        @if (User.IsInRole("Hydraulikk") || User.IsInRole("Admin"))
+        {
                 @* Hydraulisk *@
-                <thead class="table table-success table-striped">
-                <tr class="text-center">
-                    <th colspan="4">Hydraulisk</th>
-                </tr>
-                </thead>
-                <tr>
-                    <td>Sjekk hydraulikk sylinder for lekkasje</td>
-                    <td><input type="radio" asp-for="SylinderLekkasje" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SylinderLekkasje" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SylinderLekkasje" value="Defekt" class="large-Radio"/></td>
-                </tr>
-                <tr>
-                    <td>Sjekk slanger for skader og lekkasje</td>
-                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Defekt" class="large-Radio"/></td>
-                </tr>
-                <tr>
-                    <td>Test hydraulikkblokk i testbenk</td>
-                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Defekt" class="large-Radio"/></td>
-                </tr>
-                <tr>
-                    <td>Skift olje i tank</td>
-                    <td><input type="radio" asp-for="SkiftOljeiTank" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SkiftOljeiTank" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SkiftOljeiTank" value="Defekt" class="large-Radio"/></td>
-                </tr>
+            <thead class="table  table-striped table-bordered border-dark" id="hydraulic">
+            <tr class="text-center hydraulic-header">
+                <th colspan="4">Hydraulisk</th>
+            </tr>
+            </thead>
+            <tr class="@GetRowColor(Model.SylinderLekkasje) checklist-row hydraulic">
+                <td>Sjekk hydraulikk sylinder for lekkasje</td>
+                <td><input type="radio" asp-for="SylinderLekkasje" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SylinderLekkasje" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SylinderLekkasje" value="Defekt" class="large-Radio"/></td>
+            </tr>
+            <tr class="@GetRowColor(Model.SlangeSkadeLekkasje) checklist-row hydraulic">
+                <td>Sjekk slanger for skader og lekkasje</td>
+                <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SlangeSkadeLekkasje" value="Defekt" class="large-Radio"/></td>
+            </tr>
+            <tr class="@GetRowColor(Model.HydraulikkblokkTestbenk) checklist-row hydraulic">
+                <td>Test hydraulikkblokk i testbenk</td>
+                <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="HydraulikkblokkTestbenk" value="Defekt" class="large-Radio"/></td>
+            </tr>
+            <tr class="@GetRowColor(Model.SkiftOljeiTank) checklist-row hydraulic">
+                <td>Skift olje i tank</td>
+                <td><input type="radio" asp-for="SkiftOljeiTank" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SkiftOljeiTank" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SkiftOljeiTank" value="Defekt" class="large-Radio"/></td>
+            </tr>
         
-                <tr>
-                    <td>Skift olje på gir boks</td>
-                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Defekt" class="large-Radio"/></td>
-                </tr>
+            <tr class="@GetRowColor(Model.SkiftOljeiTank) checklist-row hydraulic">
+                <td>Skift olje på gir boks</td>
+                <td><input type="radio" asp-for="SkiftOljepåGirboks" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="SkiftOljepåGirboks" value="Defekt" class="large-Radio"/></td>
+            </tr>
         
-                <tr>
-                    <td>Sjekk ringsylinder åpne og skift tetninger</td>
-                    <td><input type="radio" asp-for="Ringsylinder" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="Ringsylinder" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="Ringsylinder" value="Defekt" class="large-Radio"/></td>
-                </tr>
-            <tr>
+            <tr class="@GetRowColor(Model.Ringsylinder) checklist-row hydraulic">
+                <td>Sjekk ringsylinder åpne og skift tetninger</td>
+                <td><input type="radio" asp-for="Ringsylinder" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Ringsylinder" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="Ringsylinder" value="Defekt" class="large-Radio"/></td>
+            </tr>
+            <tr class="@GetRowColor(Model.Bremsesylinder) checklist-row hydraulic">
                 <td>Sjekk bremse sylinder åpne og skift tetninger</td>
                 <td><input type="radio" asp-for="Bremsesylinder" value="OK" class="large-Radio"/></td>
                 <td><input type="radio" asp-for="Bremsesylinder" value="Bør_skiftes" class="large-Radio"/></td>
                 <td><input type="radio" asp-for="Bremsesylinder" value="Defekt" class="large-Radio"/> </td>
             </tr>
-            <tr>
+            <tr class="@GetRowColorByBoolean(Model.hydraulicsDone) checklist-row hydraulic">
                 <td>Fullført hydraulikk liste?</td>
-                <td colspan="2"><input type="radio" asp-for="hydraulicsDone" value="true" class="large-Radio"/><span>JA</span></td>
-                <td><input type="radio" asp-for="hydraulicsDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
+                <td colspan="2"><input type="radio" asp-for="hydraulicsDone" value=true class="large-Radio"/><span>JA</span></td>
+                <td><input type="radio" id="hydraulicsDone" asp-for="hydraulicsDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
             </tr>
+            <partial name="EditHiddenInputs"/>
+        } 
+        @if (User.IsInRole("Elektriker") || User.IsInRole("Admin"))
+        {
                         @* Elektro *@
-                <thead class="table table-success table-striped">
-                <tr class="text-center">
-                    <th colspan="4">Elektro</th>
-                </tr>
-                </thead>
-                <tr>
-                    <td>Sjekk ledningsnett på vinsj</td>
-                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Defekt" class="large-Radio"/></td>
-                </tr>
+            <thead class="table table-striped table-bordered border-dark" id="elektro">
+            <tr class="text-center elektro-header">
+                <th colspan="4">Elektro</th>
+            </tr>
+            </thead>
+            <tr class="@GetRowColor(Model.LedningsnettpåVinsj) checklist-row elektro">
+                <td>Sjekk ledningsnett på vinsj</td>
+                <td><input type="radio" asp-for="LedningsnettpåVinsj" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="LedningsnettpåVinsj" value="Defekt" class="large-Radio"/></td>
+            </tr>
                 
                         
-                <tr>
-                    <td>Sjekk og test radio</td>
-                    <td><input type="radio" asp-for="TestRadio" value="OK" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="TestRadio" value="Bør_skiftes" class="large-Radio"/></td>
-                    <td><input type="radio" asp-for="TestRadio" value="Defekt" class="large-Radio"/></td>
-                </tr>
+            <tr class="@GetRowColor(Model.TestRadio) checklist-row elektro">
+                <td>Sjekk og test radio</td>
+                <td><input type="radio" asp-for="TestRadio" value="OK" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="TestRadio" value="Bør_skiftes" class="large-Radio"/></td>
+                <td><input type="radio" asp-for="TestRadio" value="Defekt" class="large-Radio"/></td>
+            </tr>
                 
-            <tr>
+            <tr class="@GetRowColor(Model.Knappekasse) checklist-row elektro">
                 <td>Sjekk og test knappekasse</td>
                 <td><input type="radio" asp-for="Knappekasse" value="OK" class="large-Radio"/></td>
                 <td><input type="radio" asp-for="Knappekasse" value="Bør_skiftes" class="large-Radio"/></td>
                 <td><input type="radio" asp-for="Knappekasse" value="Defekt" class="large-Radio"/> </td>
             </tr>
-            <tr>
+            <tr class="@GetRowColorByBoolean(Model.electricianDone) checklist-row elektro">
                 <td>Fullført elektro liste?</td>
                 <td colspan="2"><input type="radio" asp-for="electricianDone" value="true" class="large-Radio"/><span>JA</span></td>
-                <td><input type="radio" asp-for="electricianDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
+                <td><input type="radio" id="electricianDone" asp-for="electricianDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
                 
-                </tr>
-            <div asp-validation-summary="All"></div>
-        </table>
-            <div class="form-group bg-white bg-opacity-75">
-                            <label asp-for="XxBar" class="control-label"></label>
-                            <input asp-for="XxBar" class="form-control" />
-                            <span asp-validation-for="XxBar" class="text-danger"></span>
-                        </div>
-                        <div class="form-group bg-white bg-opacity-75">
-                            <label asp-for="VinsjKjørAlleFunksjoner" class="control-label"></label>
-                            <input asp-for="VinsjKjørAlleFunksjoner" class="form-control" />
-                            <span asp-validation-for="VinsjKjørAlleFunksjoner" class="text-danger"></span>
-                        </div>
-                        <div class="form-group bg-white bg-opacity-75">
-                            <label asp-for="TrekkraftKN" class="control-label"></label>
-                            <input asp-for="TrekkraftKN" class="form-control" />
-                            <span asp-validation-for="TrekkraftKN" class="text-danger"></span>
-                        </div>
-            <div class="form-group bg-white bg-opacity-75">
-                <label asp-for="BremsekraftKN" class="control-label"></label>
-                <input asp-for="BremsekraftKN" class="form-control" />
-                <span asp-validation-for="BremsekraftKN" class="text-danger"></span>
+            </tr>
+            <partial name="EditHiddenInputs"/>
+        }
+        <div asp-validation-summary="All"></div>
+    </table>
+    <div class="row justify-content-center">
+    <div class="col-md-11 bg-white border border-1 rounded border-dark">    
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group bg-white bg-opacity-75">
+                    <label asp-for="XxBar" class="control-label"></label>
+                    <input asp-for="XxBar" class="form-control"/>
+                    <span asp-validation-for="XxBar" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group bg-white bg-opacity-75">
-                            <label asp-for="OrderId" class="control-label"></label>
-                            <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
-                            <span asp-validation-for="OrderId" class="text-danger"></span>
-                        </div>
-            <div class="form-group bg-white bg-opacity-75">
-                                  <input type="submit" value="Save" class="btn btn-primary" />
-                              </div>
-        </form>
-        
+            <div class="col-md-6">
+                <div class="form-group bg-white bg-opacity-75">
+                    <label asp-for="VinsjKjørAlleFunksjoner" class="control-label"></label>
+                    <input asp-for="VinsjKjørAlleFunksjoner" class="form-control"/>
+                    <span asp-validation-for="VinsjKjørAlleFunksjoner" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label asp-for="TrekkraftKN" class="control-label"></label>
+                <input asp-for="TrekkraftKN" class="form-control"/>
+                <span asp-validation-for="TrekkraftKN" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="BremsekraftKN" class="control-label"></label>
+                    <input asp-for="BremsekraftKN" class="form-control"/>
+                    <span asp-validation-for="BremsekraftKN" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="OrderId" class="control-label"></label>
+                <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
+                <span asp-validation-for="OrderId" class="text-danger"></span>
+            </div>
+        </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group mt-4">
+                    <input type="submit" value="Save" class="btn btn-primary" style="width: 50%;"/>
+                    <a class="btn btn-secondary" asp-controller="Serviceorder" asp-action="Index" style="width: 45%;">Back to List</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
 
-<div>
-    <a class="btn btn-light"asp-action="Index">Back to List</a>
-</div>
+<script>
+$(document).ready(function () {
+    function updateRoleSectionColor(roleName) {
+        var roleRows = $('.checklist-row.' + roleName);
+        var allChecked = true;
+        var hasBørSkiftes = false;
+        var hasDefekt = false;
+        var bool = false;
 
-     @*<div class="form-group">
-                <label asp-for="ClutchlamelerSlitasje" class="control-label"></label>
-                <select asp-for="ClutchlamelerSlitasje" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="ClutchlamelerSlitasje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bremser" class="control-label"></label>
-                <select asp-for="Bremser" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="Bremser" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LagerforTrommel" class="control-label"></label>
-                <select asp-for="LagerforTrommel" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="LagerforTrommel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PTOogOpplagring" class="control-label"></label>
-                <select asp-for="PTOogOpplagring" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="PTOogOpplagring" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Kjedestrammer" class="control-label"></label>
-                <select asp-for="Kjedestrammer" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="Kjedestrammer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Wire" class="control-label"></label>
-                <select asp-for="Wire" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="Wire" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PinionLager" class="control-label"></label>
-                <select asp-for="PinionLager" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="PinionLager" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KilepåKjedehjul" class="control-label"></label>
-                <select asp-for="KilepåKjedehjul" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="KilepåKjedehjul" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SylinderLekkasje" class="control-label"></label>
-                <select asp-for="SylinderLekkasje" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="SylinderLekkasje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SlangeSkadeLekkasje" class="control-label"></label>
-                <select asp-for="SlangeSkadeLekkasje" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="SlangeSkadeLekkasje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HydraulikkblokkTestbenk" class="control-label"></label>
-                <select asp-for="HydraulikkblokkTestbenk" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="HydraulikkblokkTestbenk" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SkiftOljeiTank" class="control-label"></label>
-                <select asp-for="SkiftOljeiTank" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="SkiftOljeiTank" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SkiftOljepåGirboks" class="control-label"></label>
-                <select asp-for="SkiftOljepåGirboks" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="SkiftOljepåGirboks" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ringsylinder" class="control-label"></label>
-                <select asp-for="Ringsylinder" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="Ringsylinder" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bremsesylinder" class="control-label"></label>
-                <select asp-for="Bremsesylinder" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="Bremsesylinder" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LedningsnettpåVinsj" class="control-label"></label>
-                <select asp-for="LedningsnettpåVinsj" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="LedningsnettpåVinsj" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TestRadio" class="control-label"></label>
-                <select asp-for="TestRadio" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="TestRadio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Knappekasse" class="control-label"></label>
-                <select asp-for="Knappekasse" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
-                <span asp-validation-for="Knappekasse" class="text-danger"></span>
-            </div>
-            
+        roleRows.each(function () {
+            var value = $(this).find('input[type=radio]:checked').val();
+            if (value !== "OK" && value !== "Bør_skiftes" && value !== "Defekt" && value !== "true"){
+                allChecked = false;
+            }
+            if (value === "Bør_skiftes"){
+                hasBørSkiftes = true;
+            }
+            if (value === "Defekt") {
+                hasDefekt = true;
+            }
+            if (value === "false"){
+                bool = false;
+            }
+          
+        });
 
-*@
+        var roleHeader = $('.' + roleName + '-header');
+
+        if (allChecked) {
+            roleHeader.removeClass('orange-bg red-bg').addClass('green-bg');
+        } else {
+            roleHeader.removeClass('green-bg');
+
+            if (hasBørSkiftes) {
+                roleHeader.removeClass('red-bg').addClass('orange-bg');
+            } else if (hasDefekt) {
+                roleHeader.removeClass('orange-bg').addClass('red-bg');
+            } else if (bool) {
+                roleHeader.removeClass('orange-bg').addClass('red-bg');
+            }
+        }
+    }
+
+    function updateRowColor(row, value) {
+        row.removeClass('green-bg orange-bg red-bg').addClass(GetRowColor(value));
+    }
+
+    function GetRowColor(condition) {
+        if (condition == "OK") {
+            return "green-bg";
+        } else if (condition == "Bør_skiftes") {
+            return "orange-bg";
+        } else if (condition == "Defekt") {
+            return "red-bg";
+        } else if (condition == "true") {
+            return "green-bg";
+        } else if (condition == "false") {
+            return "red-bg";
+        }
+        return ""; // Default, no background color
+    }
+
+    $('.checklist-row input[type=radio]').change(function () {
+        var row = $(this).closest('.checklist-row');
+        var value = $(this).val();
+        updateRowColor(row, value);
+
+        // Update section color for each role
+        updateRoleSectionColor('mekaniker');
+        updateRoleSectionColor('elektro');
+        updateRoleSectionColor('hydraulic');
+        // Add more roles as needed
+    });
+
+    // Initial check when the page loads
+    updateRoleSectionColor('mekaniker');
+    updateRoleSectionColor('elektro');
+    updateRoleSectionColor('hydraulic');
+    // Add more roles as needed
+});
+</script>
+
 

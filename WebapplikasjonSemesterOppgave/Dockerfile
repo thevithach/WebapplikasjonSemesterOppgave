@@ -17,4 +17,4 @@ RUN dotnet publish "WebapplikasjonSemesterOppgave.csproj" -c Release -o /app/pub
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WebapplikasjonSemesterOppgave.dll"]
+ENTRYPOINT ["dotnet", "WebapplikasjonSemesterOppgave.dll", "--environment=development"]

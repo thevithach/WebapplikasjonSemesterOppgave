@@ -4,32 +4,32 @@
     ViewData["Title"] = "Register";
 }
 <div class="text-center">
-    <h1>@ViewData["Title"]</h1>
+    <h1 class="custom-hover">Registrer</h1>
 </div>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 bg-white bg-opacity-75 border border-white rounded-3">
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div class="text-center">
-                    <h2>Create a new account.</h2>
+                    <h2 class="mt-1">Opprett ny bruker</h2>
                 </div>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
                 <div class="form-floating mb-3">
                     <input asp-for="Input.FirstName" class="form-control" autocomplete="username" aria-required="true" placeholder="Thevi" />
-                    <label asp-for="Input.FirstName">First Name</label>
+                    <label asp-for="Input.FirstName">Fornavn</label>
                     <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input asp-for="Input.LastName" class="form-control" autocomplete="username" aria-required="true" placeholder="Thach" />
-                    <label asp-for="Input.LastName">Last Name</label>
+                    <label asp-for="Input.LastName">Etternavn</label>
                     <span asp-validation-for="Input.LastName" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Address" class="form-control" autocomplete="username" aria-required="true" placeholder="Heiveien123" />
-                    <label asp-for="Input.Address">Adresse</label>
+                    <label asp-for="Input.Address">Addresse</label>
                     <span asp-validation-for="Input.Address" class="text-danger"></span>
                 </div>
 
@@ -40,21 +40,21 @@
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password">Password</label>
+                    <label asp-for="Input.Password">Passord</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <label asp-for="Input.ConfirmPassword">Bekreft passord</label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
                     <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select" aria-required="true">
-                        <option disabled selected>Select Role</option>
+                        <option disabled selected>-- Velg rolle --</option>
                     </select>
                     <span asp-validation-for="Input.Role" class="text-danger"></span>
                 </div>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary mb-2">Register</button>
             </form>
         </div>
         @*<div class="col-md-6 col-md-offset-2">

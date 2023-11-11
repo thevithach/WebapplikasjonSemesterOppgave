@@ -11,8 +11,8 @@ using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
 namespace WebapplikasjonSemesterOppgave.Migrations
 {
     [DbContext(typeof(DBContextSample))]
-    [Migration("20231024175506_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231111154635_extendOrderEntity")]
+    partial class extendOrderEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,14 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -131,6 +139,13 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -231,6 +246,27 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            AccessFailedCount = 0,
+                            Address = "Adminveien 1",
+                            ConcurrencyStamp = "8c90b5fc-94c3-4f96-a452-ac972b782698",
+                            Email = "Admin@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHYRI98LqXfoCwAXyoG8qWmBXC4VX9VnMez8qpkqblb9ErqV04bcJ6MMZGu3EUZD0A==",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "f5e2a0f4-16c0-4090-9dd8-3c0eb378c4d9",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("WebapplikasjonSemesterOppgave.Models.OrderEntity", b =>
@@ -244,6 +280,19 @@ namespace WebapplikasjonSemesterOppgave.Migrations
 
                     b.Property<string>("ModelYear")
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime>("OrderCreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("OrderPlacerCustomer")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("ProductAgreedCompletionDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("ProductReceivedDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("ProductType")
                         .HasColumnType("longtext");

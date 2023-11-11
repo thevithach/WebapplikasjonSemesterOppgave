@@ -24,6 +24,7 @@ using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
 
 namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles = "Admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<SampleUser> _signInManager;
@@ -50,7 +51,6 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _roleManager = roleManager;
         }
-
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.

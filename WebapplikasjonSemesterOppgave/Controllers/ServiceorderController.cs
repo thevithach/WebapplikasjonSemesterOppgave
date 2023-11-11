@@ -80,8 +80,7 @@ namespace WebapplikasjonSemesterOppgave.Data
         [HttpPost]
         public async Task<IActionResult> Create(OrderEntity order)
         {
-            ModelState.Remove("User");
-            ModelState.Remove("ChecklistItems");
+
             if (ModelState.IsValid)
             {
                 // Save the order to the database
@@ -174,11 +173,8 @@ namespace WebapplikasjonSemesterOppgave.Data
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductType,SerialNumber,ModelYear,Warranty,ServiceOrRepair,CustomerAgreement,ReparationDetails,WorkingHours,ReplacedPartsReturned,ShippingMethods,UserId")] OrderEntity orderEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductType,SerialNumber,ModelYear,Warranty,ServiceOrRepair,CustomerAgreement,ReparationDetails,WorkingHours,ReplacedPartsReturned,ShippingMethods,OrderCreatedDate,OrderPlacerCustomer,ProductReceivedDate,ProductAgreedCompletionDate,UserId")] OrderEntity orderEntity)
         {
-            ModelState.Remove("User");
-            ModelState.Remove("ChecklistItems");
-
             if (id != orderEntity.Id)
             {
                 return NotFound();
