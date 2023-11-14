@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebapplikasjonSemesterOppgave.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly DBContextSample _context;
@@ -142,6 +142,9 @@ namespace WebapplikasjonSemesterOppgave.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("Order");
+            ModelState.Remove("Role");
+            ModelState.Remove("AllRoles");
             if (ModelState.IsValid)
             {
                 try

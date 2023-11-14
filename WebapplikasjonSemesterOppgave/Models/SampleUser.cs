@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using WebapplikasjonSemesterOppgave.Models;
 
 namespace WebapplikasjonSemesterOppgave.Areas.Identity.Data;
@@ -17,6 +18,7 @@ public class SampleUser : IdentityUser
     public String FirstName {  get; set; }
     public String LastName { get; set; }
     public String Address { get; set; }
+    [ValidateNever]
     public ICollection<OrderEntity> Order { get; set; }
 
 

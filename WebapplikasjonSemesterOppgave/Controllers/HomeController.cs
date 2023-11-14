@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
 using WebapplikasjonSemesterOppgave.Models;
 
 namespace WebapplikasjonSemesterOppgave.Controllers
@@ -7,10 +8,11 @@ namespace WebapplikasjonSemesterOppgave.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private readonly DBContextSample _context;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _context = _context;
         }
 
         public IActionResult Index()
@@ -20,8 +22,6 @@ namespace WebapplikasjonSemesterOppgave.Controllers
                 // SVG er tatt fra https://icons.getbootstrap.com/
     new HomeEntity { SvgPath = "M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"
     , Text = "Ordre", Action = "Index", Controller = "Serviceorder" },
-    new HomeEntity { SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-    , Text = "Min Profil" },
     new HomeEntity { SvgPath = "M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zM2 1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H2zm.854-3.646a.5.5 0 0 1-.708 0l-1-1a.5.5 0 1 1 .708-.708l.646.647 1.646-1.647a.5.5 0 1 1 .708.708l-2 2zm0 8a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647 1.646-1.647a.5.5 0 0 1 .708.708l-2 2zM7 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
     , Text = "Arbeidsplan" },
     new HomeEntity { SvgPath = "M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"
@@ -41,90 +41,11 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             return View();
         }
 
-        public IActionResult Raport()
+        public IActionResult raport()
         {
             return View();
-        }
-        public IActionResult SjekkListeElektriker()
-        {
-            var itemList = new List<HomeEntity>
-            {
-                // SVG er tatt fra https://icons.getbootstrap.com/
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Mekaniker", Action = "Sjekkliste"
-                },
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Elektriker", Action = "SjekklisteElektriker"
-                },
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Hydraulikk", Action = "SjekklisteHydraulikk"
-                }
-            };
-                
-                    
-                
-            return View(itemList);
-        }
-        public IActionResult SjekkListeHydraulikk()
-        {
-            var itemList = new List<HomeEntity>
-            {
-                // SVG er tatt fra https://icons.getbootstrap.com/
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Mekaniker", Action = "Sjekkliste"
-                },
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Elektriker", Action = "SjekklisteElektriker"
-                },
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Hydraulikk", Action = "SjekklisteHydraulikk"
-                }
-            };
-                
-                    
-                
-            return View(itemList);
         }
         
-        public IActionResult Form()
-        {
-            return View();
-        }
-        public IActionResult Sjekkliste()
-        {
-            var itemList = new List<HomeEntity>
-            {
-                // SVG er tatt fra https://icons.getbootstrap.com/
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Mekaniker", Action = "Sjekkliste"
-                },
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Elektriker", Action = "SjekklisteElektriker"
-                },
-                new HomeEntity
-                {
-                    SvgPath = "M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    Text = "Hydraulikk", Action = "SjekklisteHydraulikk"
-                },
-            };
-                    return View(itemList);
-        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

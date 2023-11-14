@@ -45,7 +45,6 @@
     <None Remove="Areas\Identity\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\AppRoles\" />
     <Folder Include="Areas\" />
     <Folder Include="Areas\Identity\" />
   </ItemGroup>

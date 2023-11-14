@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<h2 class="text-center mb-5 mt-5"><p class="custom-hover">Ansatt <span style="color: darkorange">Verktøy</span></p></h2>
+<h2 class="text-center mb-5 mt-5"><p class="custom-hover">Ansatt <span style="color: darkorange" >Verktøy</span></p></h2>
     <div class="container">
         <div class="row">
             <!-- Foreach som looper gjennom listen i HomeController ved index
@@ -13,6 +13,18 @@
             {
                 <partial name="_MyPartialView" model="item" />
             }
+            <div class="col-sm-4">
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="clickable-div">
+                        
+                                    <div class="p-3 mb-5 custom-bg-color rounded text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                        </svg>
+                                        <!-- Bruker modellen HomeEntity og henter Text -->
+                                        <p class="mt-2">Min profil</p>
+                                    </div>
+                                </a>
+                            </div>
         </div>
     </div>
 

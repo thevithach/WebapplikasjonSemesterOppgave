@@ -211,7 +211,7 @@
     <td><input type="radio" name="bremseSylinder" value="Defekt" @(Model.Bremsesylinder == ChecklistItemCondition.Defekt ? "checked" : "")> Defekt
     </td>
 </tr>
-<tr class="@GetRowColor(Model.mechanicDone) checklist-row hydraulic">
+<tr class="@GetRowColor(Model.hydraulicsDone) checklist-row hydraulic">
     <td>Har hydraulikk fullført sjekkliste</td>
     <td colspan="2"> <input type="radio" name="hydraulicsDone" value="OK" @(Model.hydraulicsDone == true ? "checked" : "")> JA
     </td>

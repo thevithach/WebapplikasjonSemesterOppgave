@@ -9,8 +9,8 @@ namespace WebapplikasjonSemesterOppgave.Models
 	{
         
         public SampleUser User { get; set; }
-        public IdentityRole Role { get; set; }
-        public List<IdentityRole> AllRoles { get; set; }
+        public IdentityRole? Role { get; set; }
+        public List<IdentityRole>? AllRoles { get; set; }
         public string SelectedRole { get; set; }
 
     }
