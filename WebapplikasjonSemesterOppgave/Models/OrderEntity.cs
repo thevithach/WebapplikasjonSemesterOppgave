@@ -10,9 +10,13 @@ namespace WebapplikasjonSemesterOppgave.Models
 {
 	public enum ServiceOrderStatus
 	{
+		[Display(Name = "Under behandling")]
 		Under_behandling,
+		[Display(Name = "Hos Mekaniker")]
 		Hos_Mekaniker,
+		[Display(Name = "Hos Hydraulikk")]
 		Hos_Hydraulikk,
+		[Display(Name = "Hos Elektriker")]
 		Hos_Elektriker,
 		Ferdig
 	}

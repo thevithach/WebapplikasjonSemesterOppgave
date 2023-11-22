@@ -1,13 +1,35 @@
-@model IEnumerable<WebapplikasjonSemesterOppgave.Models.OrderEntity>
+@using WebapplikasjonSemesterOppgave.Models
+@model IEnumerable<OrderEntity>
 
 @{
     ViewData["Title"] = "Index";
+    ServiceOrderStatus? selectedStatus = ViewBag.StatusFilter as ServiceOrderStatus?;
 }
 
 <h1 class="custom-hover text-center">Service Ordre Oversikt</h1>
-
-
+<div class="row align-items-center"> <!-- Removed mb-3 for less space between the row and table -->
+    <!-- Opprett ny bruker button on the left -->
+    <div class="col-md-6">
+<!-- Filter Form -->
     <a asp-action="Create" class="btn btn-primary mb-2">Opprett ny</a>
+</div>
+    <div class="col-md-6 text-end">
+
+        <form asp-action="Index" method="get" class="form-inline justify-content-end">
+            <label for="statusFilter" class="custom-hover">Filtrer etter status:</label>
+            <select id="statusFilter" name="statusFilter">
+                <option value="">Alle</option>
+                @foreach (var status in Enum.GetValues(typeof(ServiceOrderStatus)))
+                {
+                    bool isSelected = selectedStatus.HasValue && selectedStatus.Value == (ServiceOrderStatus)status;
+                    string optionTag = isSelected ? $"<option value=\"{status}\" selected>{status}</option>" : $"<option value=\"{status}\">{status}</option>";
+                    @Html.Raw(optionTag)
+                }
+            </select>
+            <button type="submit" class="btn btn-primary mb-2">Filtrer</button>
+        </form>
+        </div>
+</div>
 
 <table class="table table-bordered table-hover border-dark bg-light bg-opacity-75 rounded-3">
     <thead class="table-dark">

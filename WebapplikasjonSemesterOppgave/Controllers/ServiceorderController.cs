@@ -32,15 +32,23 @@ namespace WebapplikasjonSemesterOppgave.Data
         }
 
         // GET: Serviceorder
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ServiceOrderStatus? statusFilter = null)
         {
             var orders = await _context.OrderEntity
                 .Include(o => o.ChecklistItems)
-                .Include(o => o.User) 
+                .Include(o => o.User)
                 .ToListAsync();
 
+            if (statusFilter.HasValue)
+            {
+                orders = orders.Where(o => o.OrderStatus == statusFilter.Value).ToList();
+            }
+
+            ViewBag.StatusFilter = statusFilter;
             return View(orders);
         }
+
+
 
 
 
