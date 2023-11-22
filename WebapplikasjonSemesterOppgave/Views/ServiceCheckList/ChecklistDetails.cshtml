@@ -303,8 +303,9 @@
 </table>
 
 
-<a asp-controller="ServiceOrder" asp-action="Index">Back to Service Orders</a>
-<a asp-controller="ServiceCheckList" asp-action="Edit" asp-route-id="@Model.Id">Edit Checklist</a>
+<a class="btn btn-secondary" style="width: 25.6%;" asp-controller="ServiceOrder" asp-action="Index">Tilbake til ordreoversikt</a>
+<a class="btn btn-primary" style="width: 74%;" asp-controller="ServiceCheckList" asp-action="Edit" asp-route-id="@Model.Id">Rediger sjekkliste</a>
+
 <script>
 $(document).ready(function () {
     function updateRoleSectionColor(roleName) {

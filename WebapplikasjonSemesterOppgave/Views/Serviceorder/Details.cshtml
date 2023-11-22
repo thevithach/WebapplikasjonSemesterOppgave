@@ -7,18 +7,16 @@
 }
 <div class="table-responsive">
     
-    <div class="bg-white container bg-opacity-75 border-dark border rounded-3">
-        <div class="row align-items-center">
-            <div class="col">
-                <h2 class="text-dark mb-0">Service Ordre Detaljer</h2>
-            </div>
-            <div class="col text-end">
-                <h4 class="text-dark mb-0">Dato mottatt: @Html.DisplayFor(model => model.OrderCreatedDate)</h4>
-            </div>
-        </div>
-    </div>
-
-    <table class="table table-striped table-hover table-bordered bg-white bg-opacity-75 text-break">
+    
+    <table class="table table-striped table-hover table-bordered bg-white bg-opacity-75 text-break rounded-3">
+        <thead class="table-dark border-dark">
+        <tr>
+            <th></th>
+            <th class="text-white text-center">
+                <h1>Service Ordre Detaljer</h1></th>
+            <th><h5>Dato mottat: @Html.DisplayFor(model => model.OrderCreatedDate)</h5></th>
+        </tr>
+            </thead>
         <thead class="table-dark text-center">
         <tr>
             <th style="width: 15%;">Beskrivelse</th>

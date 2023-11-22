@@ -6,18 +6,35 @@
 
 
 <h1 class="custom-hover text-center">Brukeroversikt</h1>
-<a class="btn btn-primary mb-2" asp-area="Identity" asp-page="/Account/Register">Opprett ny bruker</a>
-<table class="table table-responsive bg-opacity-75 bg-white">
+
+<div class="row align-items-center"> <!-- Removed mb-3 for less space between the row and table -->
+    <!-- Opprett ny bruker button on the left -->
+    <div class="col-md-6">
+        <a class="btn btn-primary mb-2" asp-area="Identity" asp-page="/Account/Register">Opprett ny bruker</a>
+    </div>
+
+    <!-- Filtrer form on the right -->
+    <div class="col-md-6 text-end">
+        <form asp-action="Index" method="get" class="form-inline justify-content-end">
+            <label for="role" class="mr-2 custom-hover">Filtrer etter rolle:</label>
+            <input type="text" name="role" id="role" class="col-md-6 mb-2"/>
+            <button type="submit" class="btn btn-primary mb-2">Filtrer</button>
+        </form>
+    </div>
+</div>
+
+<table class="table table-bordered border-dark table-responsive bg-opacity-75 bg-white rounded-3">
     <thead class="table-dark">
     <tr class="">
-        <th>Bruker ID</th>
+        <th style="width: 20%;">Bruker ID</th>
         <th>Brukernavn</th>
         <th>Email</th>
         <th>Rolle</th>
-        <th>Handlinger</th>
+        <th style="width: 20%;">Handlinger</th>
 
     </tr>
     </thead>
+    
     <tbody>
     @foreach (var userWithRole in Model)
     {
@@ -27,10 +44,12 @@
             <td>@userWithRole.User.Email</td>
             <td>@userWithRole.Role.Name</td>
             <td>
-                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@userWithRole.User.Id">Edit</a>
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@userWithRole.User.Id">Details</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@userWithRole.User.Id">Delete</a>
-            </td>
+                <div class="d-grid gap-2">
+                    <a class="btn btn-warning col" asp-action="Edit" asp-route-id="@userWithRole.User.Id">Rediger</a>
+                    <a class="btn btn-info col" asp-action="Details" asp-route-id="@userWithRole.User.Id">Detaljer</a>
+                    <a class="btn btn-danger col" asp-action="Delete" asp-route-id="@userWithRole.User.Id">Slett</a>
+                </div>
+                </td>
         </tr>
     }
     </tbody>
