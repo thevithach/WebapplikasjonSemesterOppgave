@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="bg-white bg-opacity-75">
+<div class="bg-white bg-opacity-75 border-white border rounded-3">
     <h1>Details</h1>
 
-    <h4>SampleUser</h4>
     <hr/>
     <dl class="row">
         <dt class="col-sm-2">
@@ -107,8 +106,8 @@
             @Html.DisplayFor(model => model.AccessFailedCount)
         </dd>
     </dl>
-</div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> 
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
 </div>
