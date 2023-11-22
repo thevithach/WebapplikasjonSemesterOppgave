@@ -39,29 +39,28 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         /// <returns>
         /// Returns a view displaying all users with their associated roles.
         /// </returns>
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string role = null)
         {
-            //Starter tom liste "UserWithRoleView"
             var usersWithRoles = new List<UserWithRoleView>();
-            //Itererer gjennom kolleksjonen av brukere
-            //Fetcher alle brukere ved bruk av UserManager<SampleUser> instansen og konverterer resultatet til liste
+
             foreach (var user in await _userManager.Users.ToListAsync())
             {
-                //Fetcher rollen assosiert med bruker med GetRolesAsync som er en del av UserManager, lagres i var Roles
                 var roles = await _userManager.GetRolesAsync(user);
-                //Henter første rollenavn, men er bare en rolle til hver bruker så er perf
-                var role = roles.FirstOrDefault(); // Antakelse av en bruker
-                //Loopen iterer gjennom alle brukere og legger til usersWithRoles listen,
-                //sender usersWithRoles som modell til view
-                usersWithRoles.Add(new UserWithRoleView
+                var userRole = roles.FirstOrDefault(); // Assuming one role per user
+
+                if (role == null || userRole == role)
                 {
-                    User = user,
-                    Role = role != null ? await _roleManager.FindByNameAsync(role) : null
-                });
+                    usersWithRoles.Add(new UserWithRoleView
+                    {
+                        User = user,
+                        Role = userRole != null ? await _roleManager.FindByNameAsync(userRole) : null
+                    });
+                }
             }
 
             return View(usersWithRoles);
         }
+
 
         // GET: Users/Details/5
         /// <summary>
