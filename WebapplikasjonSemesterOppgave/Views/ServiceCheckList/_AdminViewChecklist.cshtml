@@ -1,9 +1,4 @@
-@model WebapplikasjonSemesterOppgave.Models.ServiceChecklistEntity
-
-@{
-    ViewData["Title"] = "Edit";
-
-}
+@model ServiceChecklistEntity
 @functions {
     string GetRowColor(ChecklistItemCondition? condition) {
         if (condition == ChecklistItemCondition.OK) {
@@ -33,31 +28,8 @@
         return ""; 
     }
 }
-                  
-<h1 class="custom-hover">Edit</h1>
-                    
-<h4 class="custom-hover">ServiceChecklistEntity</h4>
-<hr />
 
-<form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
-    <table class="table table-striped table-hover table-bordered text-center border-dark bg-white bg-opacity-75">
-        <thead class="table-dark">
-        <tr>
-            <th style="width: auto;">Sjekkpunkter</th>
-            <th style="width: 15%;"> OK</th>
-            <th style="width: 15%;">Bør skiftes</th>
-            <th style="width: 15%;">Defekt</th>
-        </tr>
-        </thead>
-        @if (User.IsInRole("Admin"))
-        {
-            <partial name="_AdminViewChecklist"/>
-        }
-        @if (User.IsInRole("Mekaniker"))
-        {
-            <thead class="table table-striped table-bordered border-dark" id="Mekaniker">
+<thead class="table table-striped table-bordered border-dark" id="Mekaniker">
             <tr class="text-center mekaniker-header">
                 <th colspan="4">Mekaniker</th>
             </tr>
@@ -116,10 +88,8 @@
                 <td colspan="2"><input type="radio" asp-for="mechanicDone" value=true class="large-Radio"/><span>JA</span></td>
                 <td><input type="radio" id="mechanicDone" asp-for="mechanicDone" value=false class="large-Radio"/><span class="mb-5">NEI</span></td>
             </tr>
-            <partial name="_EditHiddenInputs"/>
-        }
-        @if (User.IsInRole("Hydraulikk"))
-        {
+        
+
                 @* Hydraulisk *@
             <thead class="table  table-striped table-bordered border-dark" id="hydraulic">
             <tr class="text-center hydraulic-header">
@@ -175,10 +145,6 @@
                 <td colspan="2"><input type="radio" asp-for="hydraulicsDone" value=true class="large-Radio"/><span>JA</span></td>
                 <td><input type="radio" id="hydraulicsDone" asp-for="hydraulicsDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
             </tr>
-            <partial name="_EditHiddenInputs"/>
-        } 
-        @if (User.IsInRole("Elektriker"))
-        {
                         @* Elektro *@
             <thead class="table table-striped table-bordered border-dark" id="elektro">
             <tr class="text-center elektro-header">
@@ -212,141 +178,3 @@
                 <td><input type="radio" id="electricianDone" asp-for="electricianDone" value="false" class="large-Radio"/><span class="mb-5">NEI</span></td>
                 
             </tr>
-            <partial name="_EditHiddenInputs"/>
-        }
-        <div asp-validation-summary="All"></div>
-    </table>
-    <div class="row justify-content-center">
-    <div class="col-md-11 bg-white border border-1 rounded border-dark">    
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group bg-white bg-opacity-75">
-                    <label asp-for="XxBar" class="control-label"></label>
-                    <input asp-for="XxBar" class="form-control"/>
-                    <span asp-validation-for="XxBar" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group bg-white bg-opacity-75">
-                    <label asp-for="VinsjKjørAlleFunksjoner" class="control-label"></label>
-                    <input asp-for="VinsjKjørAlleFunksjoner" class="form-control"/>
-                    <span asp-validation-for="VinsjKjørAlleFunksjoner" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 form-group">
-                <label asp-for="TrekkraftKN" class="control-label"></label>
-                <input asp-for="TrekkraftKN" class="form-control"/>
-                <span asp-validation-for="TrekkraftKN" class="text-danger"></span>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="BremsekraftKN" class="control-label"></label>
-                    <input asp-for="BremsekraftKN" class="form-control"/>
-                    <span asp-validation-for="BremsekraftKN" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="OrderId" class="control-label"></label>
-                <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
-                <span asp-validation-for="OrderId" class="text-danger"></span>
-            </div>
-        </div>
-            <div class="col-md-6 mb-2">
-                <div class="form-group mt-4">
-                    <input type="submit" value="Lagre" class="btn btn-primary" style="width: 60%;"/>
-                    <a class="btn btn-secondary" asp-controller="Serviceorder" asp-action="Index" style="width: 39.2%;">Tilbake til liste</a>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<script>
-$(document).ready(function () {
-    function updateRoleSectionColor(roleName) {
-        var roleRows = $('.checklist-row.' + roleName);
-        var allChecked = true;
-        var hasBørSkiftes = false;
-        var hasDefekt = false;
-        var bool = false;
-
-        roleRows.each(function () {
-            var value = $(this).find('input[type=radio]:checked').val();
-            if (value !== "OK" && value !== "Bør_skiftes" && value !== "Defekt" && value !== "true"){
-                allChecked = false;
-            }
-            if (value === "Bør_skiftes"){
-                hasBørSkiftes = true;
-            }
-            if (value === "Defekt") {
-                hasDefekt = true;
-            }
-            if (value === "false"){
-                bool = false;
-            }
-          
-        });
-
-        var roleHeader = $('.' + roleName + '-header');
-
-        if (allChecked) {
-            roleHeader.removeClass('orange-bg red-bg').addClass('green-bg');
-        } else {
-            roleHeader.removeClass('green-bg');
-
-            if (hasBørSkiftes) {
-                roleHeader.removeClass('red-bg').addClass('orange-bg');
-            } else if (hasDefekt) {
-                roleHeader.removeClass('orange-bg').addClass('red-bg');
-            } else if (bool) {
-                roleHeader.removeClass('orange-bg').addClass('red-bg');
-            }
-        }
-    }
-
-    function updateRowColor(row, value) {
-        row.removeClass('green-bg orange-bg red-bg').addClass(GetRowColor(value));
-    }
-
-    function GetRowColor(condition) {
-        if (condition == "OK") {
-            return "green-bg";
-        } else if (condition == "Bør_skiftes") {
-            return "orange-bg";
-        } else if (condition == "Defekt") {
-            return "red-bg";
-        } else if (condition == "true") {
-            return "green-bg";
-        } else if (condition == "false") {
-            return "red-bg";
-        }
-        return ""; // Default, no background color
-    }
-
-    $('.checklist-row input[type=radio]').change(function () {
-        var row = $(this).closest('.checklist-row');
-        var value = $(this).val();
-        updateRowColor(row, value);
-
-        // Update section color for each role
-        updateRoleSectionColor('mekaniker');
-        updateRoleSectionColor('elektro');
-        updateRoleSectionColor('hydraulic');
-        // Add more roles as needed
-    });
-
-    // Initial check when the page loads
-    updateRoleSectionColor('mekaniker');
-    updateRoleSectionColor('elektro');
-    updateRoleSectionColor('hydraulic');
-    // Add more roles as needed
-});
-</script>
-
-

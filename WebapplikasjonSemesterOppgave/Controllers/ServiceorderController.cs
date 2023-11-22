@@ -84,7 +84,7 @@ namespace WebapplikasjonSemesterOppgave.Data
             if (ModelState.IsValid)
             {
                 // Save the order to the database
-                Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                // Response.Headers.Add("X-Content-Type-Options", "nosniff");
                 _context.OrderEntity.Add(order);
                 await _context.SaveChangesAsync();
 
@@ -133,25 +133,7 @@ namespace WebapplikasjonSemesterOppgave.Data
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-
-
-        // POST: Serviceorder/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[HttpPost]
-         [ValidateAntiForgeryToken]
-         public async Task<IActionResult> Create([Bind("Id,ProductType,SerialNumber,ModelYear,Warranty,ServiceOrRepair,CustomerAgreement,ReparationDetails,WorkingHours,ReplacedPartsReturned,ShippingMethods,UserId")] OrderEntity orderEntity)
-         {
-             //if (ModelState.IsValid)
-             //{
-             _context.Add(orderEntity);
-             await _context.SaveChangesAsync();
-             return RedirectToAction(nameof(Index));
-             //}
-             //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderEntity.UserId);
-             //return View(orderEntity);
-         }*/
-
+        
         // GET: Serviceorder/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -144,6 +144,8 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            //Sikkerhetsvalidering for å sikre at return url ikke er en ekstern link
+            //returnerer verdi hvis den er null ved bruk av null coalescing operator (??=)
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)

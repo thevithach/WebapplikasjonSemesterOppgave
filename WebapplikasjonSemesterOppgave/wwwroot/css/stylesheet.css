@@ -10,15 +10,20 @@
 .custom-hover {
     color: #9CB7C2; /* Replace #your-color with your desired color code */
 }
+
      /* Custom CSS for the hover effect */
 .navbar-nav .custom-hover:hover {
     color: darkorange; /* Change the text color on hover */
+    transform: scale(1.1); /* Slightly increase the size */
+    transition: all 0.3s ease; /* Smooth transition for the effect */
 }
 .custom-bg-color {
     background-color: rgb(16, 24, 32);
 }
 .navbar-brand.custom-hover {
     color: #9CB7C2; /* Change to your desired color for the logo */
+    transform: scale(1.1); /* Slightly increase the size */
+    transition: all 0.3s ease; /* Smooth transition for the effect */
 }
 
 .navbar-brand.custom-hover:hover {
@@ -48,3 +53,15 @@
     max-height: 400px; /* Set the maximum height you prefer */
     overflow: auto;
 }
+.logo-icon {
+    width: 30rem;
+    display: block/* Keeps the aspect ratio */
+
+}
+.logo_mobile{
+    display: none;
+}
+
+
+
+

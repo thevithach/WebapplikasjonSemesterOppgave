@@ -14,24 +14,43 @@ namespace WebapplikasjonSemesterOppgave.Controllers
     public class AppRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
+        /// <summary>
+        /// Initialiserer en ny instans av AppRolesController klassen.
+        /// Denne konstruktøren tar en RoleManager<IdentityRole> som en avhengighet for å håndtere rolleoperasjoner.
+        /// </summary>
+        /// <param name="roleManager">RoleManager brukes til å håndtere brukerroller i applikasjonen.</param>
         public AppRolesController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
         }
-        // GET: /<controller>/
-        //List all the Roles created by Users
+        
+        /// <summary>
+        /// Henter og viser en liste over alle roller i applikasjonen. 
+        /// Dette inkluderer alle roller som er opprettet.
+        /// </summary>
+        /// <returns>En View som inneholder en liste over roller.</returns>
         public IActionResult Index()
         {
             var roles = _roleManager.Roles;
             return View(roles);
         }
+        
+        /// <summary>
+        /// Returnerer en view hvor en ny rolle kan opprettes. Denne metoden viser et skjema for oppretting av en ny rolle.
+        /// </summary>
+        /// <returns>En View for å opprette en ny rolle.</returns>
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+        /// <summary>
+        /// Oppretter en ny rolle i databasen, metoden sjekker om rollen eksisterer fra før
+        /// og unngår å opprette duplikater. Dersom rollen ikke eksieterer fra før opprettes den
+        /// </summary>
+        /// <param name="model">Parameteren tar i mot en IdentityRole model som inneholder navnet på rollen</param>
+        /// <returns>Redirectes til index og viser en tabell med roller opprettet</returns>
         [HttpPost]
-
         public async Task<IActionResult> Create(IdentityRole model)
         {
             //Avoid duplicate role

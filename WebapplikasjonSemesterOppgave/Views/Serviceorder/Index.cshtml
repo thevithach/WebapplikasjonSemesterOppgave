@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-white text-center">Service Ordre Oversikt</h1>
+<h1 class="custom-hover text-center">Service Ordre Oversikt</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Opprett ny</a>
 </p>
-<table class="table table-bordered table-hover border-dark bg-light bg-opacity-75">
+<table class="table table-bordered table-hover border-dark bg-light bg-opacity-75 rounded-3">
     <thead class="table-dark">
         <tr>
             <th>
@@ -24,7 +24,7 @@
             <th>
                 Ordre Status                
                 </th>
-            <th>Handlinger</th>
+            <th style="width: 20%;">Handlinger</th>
         </tr>
     </thead>
     <tbody>
@@ -70,9 +70,9 @@
                  </td>
             <td class="text-center">
                 <div class="d-grid gap-2">
-                <a class="btn btn-warning col"asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-info col" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-danger col"asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-warning col"asp-action="Edit" asp-route-id="@item.Id">Rediger</a>
+                <a class="btn btn-info col" asp-action="Details" asp-route-id="@item.Id">Detaljer</a>
+                <a class="btn btn-danger col"asp-action="Delete" asp-route-id="@item.Id">Slett</a>
                 </div>
             </td>
         </tr>

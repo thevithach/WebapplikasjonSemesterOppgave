@@ -7,16 +7,16 @@
 }
     
 <h1 class="custom-hover text-center" style="">Rolleoversikt</h1>
-<p>
-    <a asp-action="Create" class="btn btn-primary">Lag Rolle</a>
-</p>
+
+    <a asp-action="Create" class="btn btn-primary mb-2">Lag Rolle</a>
+
 
 <table class="table table-bordered border-dark bg-opacity-75 bg-white">
     <thead class="table-dark">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th style="width: 50%">@Html.DisplayNameFor(model => model.Id)</th>
 
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th style="width: 50%">Rollenavn</th>
         </tr>
     </thead>
     <tbody>
