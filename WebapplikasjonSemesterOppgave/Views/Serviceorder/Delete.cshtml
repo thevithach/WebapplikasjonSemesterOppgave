@@ -116,10 +116,10 @@
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id"/>
-            <input type="submit" value="Slett" class="btn btn-danger mb-2" style="width: 64%;"/>
+            <button type="submit" class="btn btn-danger" value="Slett" style="width: 64%;" onclick="return confirm('Er du sikker du vil slette denne ordren?');">Delete</button>
             <a asp-action="Index" class="btn btn-secondary mb-2" style="width: 35%;">Tilbake til ordreoversikt</a>
         </form>
-                        <hr/>
+                    <hr/>
 
         </div>
     </dl>
