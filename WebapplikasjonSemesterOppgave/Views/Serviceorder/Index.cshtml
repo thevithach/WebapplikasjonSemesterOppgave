@@ -22,8 +22,15 @@
                 @foreach (var status in Enum.GetValues(typeof(ServiceOrderStatus)))
                 {
                     bool isSelected = selectedStatus.HasValue && selectedStatus.Value == (ServiceOrderStatus)status;
-                    string optionTag = isSelected ? $"<option value=\"{status}\" selected>{status}</option>" : $"<option value=\"{status}\">{status}</option>";
-                    @Html.Raw(optionTag)
+
+                    if (isSelected)
+                    {
+                        <option value="@status" selected>@status</option>
+                    }
+                    else
+                    {
+                        <option value="@status">@status</option>
+                    }
                 }
             </select>
             <button type="submit" class="btn btn-primary mb-2">Filtrer</button>
