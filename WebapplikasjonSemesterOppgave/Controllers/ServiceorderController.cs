@@ -20,7 +20,7 @@ namespace WebapplikasjonSemesterOppgave.Data
             _context = context;
         }
         
-
+    
         public IActionResult ServiceOrderDetails(int id)
         {
             var serviceOrder = _context.OrderEntity.Find(id);
@@ -47,17 +47,9 @@ namespace WebapplikasjonSemesterOppgave.Data
             ViewBag.StatusFilter = statusFilter;
             return View(orders);
         }
+   
 
 
-
-
-
-
-        // public async Task<IActionResult> Index()
-        // {
-        //     var dBContextSample = _context.OrderEntity.Include(o => o.User);
-        //     return View(await dBContextSample.ToListAsync());
-        // }
         
 
         // GET: Serviceorder/Details/5
@@ -168,10 +160,9 @@ namespace WebapplikasjonSemesterOppgave.Data
             if (id != orderEntity.Id)
             {
                 return NotFound();
-            }
-            Response.Headers.Add("X-Content-Type-Options", "nosniff");
-             if (ModelState.IsValid)
-             {
+            } 
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(orderEntity);
@@ -189,7 +180,7 @@ namespace WebapplikasjonSemesterOppgave.Data
                     }
                 }
                 return RedirectToAction(nameof(Index));
-             }
+            }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderEntity.UserId);
             return View(orderEntity);
         }

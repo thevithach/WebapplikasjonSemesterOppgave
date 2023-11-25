@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using WebapplikasjonSemesterOppgave.Areas.Identity.Data;
 using WebapplikasjonSemesterOppgave.Models;
 using Microsoft.AspNetCore.Authorization;
+using WebapplikasjonSemesterOppgave.ViewModels;
 
 
 namespace WebapplikasjonSemesterOppgave.Controllers
@@ -41,7 +42,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         /// </returns>
         public async Task<IActionResult> Index(string role = null)
         {
-            var usersWithRoles = new List<UserWithRoleView>();
+            var usersWithRoles = new List<UserWithRoleVM>();
 
             foreach (var user in await _userManager.Users.ToListAsync())
             {
@@ -50,7 +51,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
 
                 if (role == null || userRole == role)
                 {
-                    usersWithRoles.Add(new UserWithRoleView
+                    usersWithRoles.Add(new UserWithRoleVM
                     {
                         User = user,
                         Role = userRole != null ? await _roleManager.FindByNameAsync(userRole) : null
@@ -155,7 +156,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
                 // Get the roles assigned to the user
                 var userRoles = await _userManager.GetRolesAsync(sampleUser);
 
-                var model = new UserWithRoleView
+                var model = new UserWithRoleVM
                 {
                     User = sampleUser,
                     AllRoles = allRoles,
@@ -185,7 +186,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, UserWithRoleView model)
+        public async Task<IActionResult> Edit(string id, UserWithRoleVM model)
         {
             if (id != model.User.Id)
             {

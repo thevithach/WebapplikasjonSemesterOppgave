@@ -1,7 +1,7 @@
 ﻿using System;
-namespace WebapplikasjonSemesterOppgave.Models
+namespace WebapplikasjonSemesterOppgave.ViewModels
 {
-	public class HomeEntity
+	public class HomeViewModel
 	{
         //Parametre for HomeController for å definere SVG Ikon, Text og AspAction for Home/Index
         public string SvgPath { get; set; }
