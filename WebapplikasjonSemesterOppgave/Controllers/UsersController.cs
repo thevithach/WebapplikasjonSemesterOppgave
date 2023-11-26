@@ -14,7 +14,7 @@ using WebapplikasjonSemesterOppgave.ViewModels;
 
 namespace WebapplikasjonSemesterOppgave.Controllers
 {
-    // [Authorize(Roles = "Admin")]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly DBContextSample _context;
@@ -40,6 +40,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         /// <returns>
         /// Returns a view displaying all users with their associated roles.
         /// </returns>
+        [HttpGet]
         public async Task<IActionResult> Index(string role = null)
         {
             var usersWithRoles = new List<UserWithRoleVM>();
@@ -63,7 +64,6 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         }
 
 
-        // GET: Users/Details/5
         /// <summary>
         /// Retrieves and displays the details of a specific user based on the provided user ID.
         /// This method checks if the ID is null or if the Users set in the context is null, and returns a NotFound result in these cases.
@@ -74,6 +74,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         /// <returns>
         /// If the user ID is null, the Users set is null, or the user is not found, it returns a NotFound result.
         /// </returns>
+        [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Users == null)
@@ -91,36 +92,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             return View(sampleUser);
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
-        /// <summary>
-        /// Handles the creation of a new user. This method is protected against overposting attacks by binding only specific properties.
-        /// It checks if the model state is valid, and if so, adds the new user to the context and saves the changes.
-        /// If the model state is not valid, it simply returns to the view with the user data for correction.
-        /// </summary>
-        /// <param name="sampleUser">The 'SampleUser' object containing the user's data.</param>
-        /// <returns>
-        /// An 'IActionResult' that redirects to the 'Index' view if the user is successfully created. 
-        /// If the model state is invalid, it returns to the same view with the user data for correction.
-        /// </returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] SampleUser sampleUser)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(sampleUser);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(sampleUser);
-        }
-        // GET: Users/Edit/5
+        
         /// <summary>
         /// Retrieves a user's details for editing based on the provided user ID. 
         /// This method first checks if the user ID is null, returning NotFound if so.
@@ -135,6 +107,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         /// Returns a NotFound result if the ID is null or the user isn't found.
         /// In case of an exception, returns a StatusCode 500 result with the error message.
         /// </returns>
+        [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
             try
@@ -194,8 +167,6 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             }
 
             ModelState.Remove("Order");
-            // ModelState.Remove("Role");
-            // ModelState.Remove("AllRoles");
             if (ModelState.IsValid)
             {
                 try

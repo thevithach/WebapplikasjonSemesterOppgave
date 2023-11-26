@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using WebapplikasjonSemesterOppgave.Models;
 
 namespace WebapplikasjonSemesterOppgave.Controllers
 {
+    [Authorize]
     public class ServiceCheckListController : Controller
     {
         private readonly DBContextSample _context;
@@ -19,55 +21,9 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             _context = context;
         }
         /// <summary>
-        /// Calculates the overall status of an order based on the completion status of tasks by different roles.
+        /// Retrieves a list of checklist items and their associated order statuses for display in the ServiceCheckList index view.
         /// </summary>
-        /// <param name="orderId">The ID of the order for which the status is to be calculated.</param>
-        /// <returns>
-        /// A string indicating the overall status of the order. It can be "Ferdig",
-        /// "Venter på hydraulikk og Elektriker"
-        /// or "Under_behandling"
-        /// </returns>
-        public string CalculateOrderStatus(int orderId)
-        {
-            var checklistItems = _context.ChecklistItems.Where(item => item.OrderId == orderId).ToList();
-
-            // Initialize flags to track the overall completion status for each role
-            bool allMechanicsDone = true;
-            bool allHydraulicsDone = true;
-            bool allElectriciansDone = true;
-
-            foreach (var item in checklistItems)
-            {
-                // Check if the mechanic has completed their part
-                if (item.mechanicDone != true)
-                {
-                    allMechanicsDone = false;
-                }
-
-                // Check if the hydraulics have completed their part
-                if (item.hydraulicsDone != true)
-                {
-                    allHydraulicsDone = false;
-                }
-
-                // Check if the electrician has completed their part
-                if (item.electricianDone != true)
-                {
-                    allElectriciansDone = false;
-                }
-            }
-
-            if (allMechanicsDone && allHydraulicsDone && allElectriciansDone)
-            {
-                return "Ferdig";
-            }
-            if (allMechanicsDone)
-            {
-                return "Venter på hydraulikk og Elektriker";
-            }
-
-            return "Under_behandling";
-        }
+        /// <returns>A view with a list of checklists associated with different orders</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -185,28 +141,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             return View(serviceChecklistEntity);
         }
         
-        /// <summary>
-        /// Retrieves the details of a specific checklist item based on the provided order ID.
-        /// </summary>
-        /// <param name="id">The ID of the order associated with the checklist item to be retrieved.</param>
-        /// <returns>
-        /// Returns a view displaying the details of the specified checklist item.
-        /// If no checklist item is found for the given order ID, a 'NotFound' result is returned.
-        /// </returns>
-        [HttpGet]
-        public IActionResult ChecklistDetails(int id)
-        {
-            var checklist = _context.ChecklistItems
-                .Include(c => c.Order)
-                .SingleOrDefault(c => c.OrderId == id);
-
-            if (checklist == null)
-            {
-                return NotFound();
-            }
-
-            return View("~/Views/ServiceCheckList/ChecklistDetails.cshtml", checklist);
-        }
+        
         /// <summary>
         /// Handles the submission of an edited service checklist entity and updates it in the database.
         /// </summary>
@@ -305,6 +240,29 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         }
         
         /// <summary>
+        /// Retrieves the details of a specific checklist item based on the provided order ID.
+        /// </summary>
+        /// <param name="id">The ID of the order associated with the checklist item to be retrieved.</param>
+        /// <returns>
+        /// Returns a view displaying the details of the specified checklist item.
+        /// If no checklist item is found for the given order ID, a 'NotFound' result is returned.
+        /// </returns>
+        [HttpGet]
+        public IActionResult ChecklistDetails(int id)
+        {
+            var checklist = _context.ChecklistItems
+                .Include(c => c.Order)
+                .SingleOrDefault(c => c.OrderId == id);
+
+            if (checklist == null)
+            {
+                return NotFound();
+            }
+
+            return View("~/Views/ServiceCheckList/ChecklistDetails.cshtml", checklist);
+        }
+        
+        /// <summary>
         /// Checks if a service checklist entity with a specific ID exists in the context.
         /// </summary>
         /// <param name="id">The ID of the service checklist entity to check for existence.</param>
@@ -314,6 +272,56 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         private bool ServiceChecklistEntityExists(int id)
         {
           return (_context.ChecklistItems?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        /// <summary>
+        /// Calculates the overall status of an order based on the completion status of tasks by different roles.
+        /// </summary>
+        /// <param name="orderId">The ID of the order for which the status is to be calculated.</param>
+        /// <returns>
+        /// A string indicating the overall status of the order. It can be "Ferdig",
+        /// "Venter på hydraulikk og Elektriker"
+        /// or "Under_behandling"
+        /// </returns>
+        public string CalculateOrderStatus(int orderId)
+        {
+            var checklistItems = _context.ChecklistItems.Where(item => item.OrderId == orderId).ToList();
+
+            // Initialize flags to track the overall completion status for each role
+            bool allMechanicsDone = true;
+            bool allHydraulicsDone = true;
+            bool allElectriciansDone = true;
+
+            foreach (var item in checklistItems)
+            {
+                // Check if the mechanic has completed their part
+                if (item.mechanicDone != true)
+                {
+                    allMechanicsDone = false;
+                }
+
+                // Check if the hydraulics have completed their part
+                if (item.hydraulicsDone != true)
+                {
+                    allHydraulicsDone = false;
+                }
+
+                // Check if the electrician has completed their part
+                if (item.electricianDone != true)
+                {
+                    allElectriciansDone = false;
+                }
+            }
+
+            if (allMechanicsDone && allHydraulicsDone && allElectriciansDone)
+            {
+                return "Ferdig";
+            }
+            if (allMechanicsDone)
+            {
+                return "Venter på hydraulikk og Elektriker";
+            }
+
+            return "Under_behandling";
         }
     }
 }
