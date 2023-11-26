@@ -41,6 +41,7 @@
 
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @Html.AntiForgeryToken()
     <input type="hidden" asp-for="Id" />
     <table class="table table-striped table-hover table-bordered text-center border-dark bg-white bg-opacity-75">
         <thead class="table-dark">

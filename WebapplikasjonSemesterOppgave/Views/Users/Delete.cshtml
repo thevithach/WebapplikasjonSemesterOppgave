@@ -109,7 +109,8 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id"/>
         <button type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Er du sikker du vil slette denne brukeren?');">Slett</button>
         <a asp-action="Index" class="btn btn-secondary">Back to List</a>
     </form>

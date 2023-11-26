@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebapplikasjonSemesterOppgave.Migrations
 {
     /// <inheritdoc />
-    public partial class extendOrderEntity : Migration
+    public partial class AllMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -208,17 +208,17 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProductType = table.Column<string>(type: "longtext", nullable: true)
+                    ProductType = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SerialNumber = table.Column<string>(type: "longtext", nullable: true)
+                    SerialNumber = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ModelYear = table.Column<string>(type: "longtext", nullable: true)
+                    ModelYear = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Warranty = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     ServiceOrRepair = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    CustomerAgreement = table.Column<string>(type: "longtext", nullable: true)
+                    CustomerAgreement = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ReparationDetails = table.Column<string>(type: "longtext", nullable: true)
+                    ReparationDetails = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     WorkingHours = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -303,7 +303,7 @@ namespace WebapplikasjonSemesterOppgave.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "Adminveien 1", "8c90b5fc-94c3-4f96-a452-ac972b782698", "Admin@gmail.com", true, "Admin", "Admin", true, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEHYRI98LqXfoCwAXyoG8qWmBXC4VX9VnMez8qpkqblb9ErqV04bcJ6MMZGu3EUZD0A==", null, true, "f5e2a0f4-16c0-4090-9dd8-3c0eb378c4d9", false, "Admin@gmail.com" });
+                values: new object[] { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "Adminveien 1", "05a32087-d177-4a35-816c-7470cd8f6366", "Admin@gmail.com", true, "Admin", "Admin", true, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEFDXpJzTL68pG8j1MgWDr4vRocnnby8TtYws7wXyCIT8DpkvRH2CGKkK2ZJDq5v7Rw==", null, true, "7e763442-53d4-425f-8a0b-04fa8196be7a", false, "Admin@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Http.Features
 @model IEnumerable<WebapplikasjonSemesterOppgave.Models.ServiceChecklistEntity>
 
 @{
@@ -21,70 +22,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Bremser)
         </th>
+        
         <th>
-            @Html.DisplayNameFor(model => model.LagerforTrommel)
+            @Html.DisplayNameFor(model => model.OrderId)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PTOogOpplagring)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Kjedestrammer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wire)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PinionLager)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KilepåKjedehjul)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SylinderLekkasje)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SlangeSkadeLekkasje)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HydraulikkblokkTestbenk)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SkiftOljeiTank)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SkiftOljepåGirboks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ringsylinder)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bremsesylinder)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LedningsnettpåVinsj)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TestRadio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Knappekasse)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.XxBar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VinsjKjørAlleFunksjoner)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrekkraftKN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BremsekraftKN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Order)
-        </th>
-        <th></th>
+        <th>Handlinger</th>
     </tr>
     </thead>
     <tbody>
@@ -92,84 +34,19 @@
     {
         <td>@ViewBag.OrderStatusList[ViewBag.ChecklistItems.IndexOf(items)]</td>
     }
-    @*@foreach (var item in Model)
+    @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClutchlamelerSlitasje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bremser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LagerforTrommel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PTOogOpplagring)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kjedestrammer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wire)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PinionLager)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KilepåKjedehjul)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SylinderLekkasje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SlangeSkadeLekkasje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HydraulikkblokkTestbenk)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SkiftOljeiTank)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SkiftOljepåGirboks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ringsylinder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bremsesylinder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LedningsnettpåVinsj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TestRadio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Knappekasse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.XxBar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VinsjKjørAlleFunksjoner)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrekkraftKN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BremsekraftKN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-    }*@
+        <td>@Html.DisplayFor(modelItem => item.ClutchlamelerSlitasje)</td>
+        <td>@Html.DisplayFor(modelItem => item.ClutchlamelerSlitasje)</td>
+        <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
+        <td class="text-center">
+            <div class="d-grid gap-2">
+                <a class="btn btn-warning col"asp-action="Edit" asp-route-id="@item.Id">Rediger</a>
+                <a class="btn btn-info col" asp-action="Details" asp-route-id="@item.Id">Detaljer</a>
+                <a class="btn btn-danger col"asp-action="Delete" asp-route-id="@item.Id">Slett</a>
+            </div>
+        </td>
+    }
     </tbody>
+    
 </table>

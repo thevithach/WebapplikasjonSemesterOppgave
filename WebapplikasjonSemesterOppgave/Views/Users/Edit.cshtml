@@ -9,6 +9,7 @@
         <h1>Endre Bruker</h1>
         <div asp-validation-summary="All"></div>
         <form asp-action="Edit">
+                    @Html.AntiForgeryToken()
             <input type="hidden" asp-for="User.Id"/>
             <div class="form-group">
                 <label asp-for="User.FirstName" class="control-label"><h5>Fornavn</h5></label>

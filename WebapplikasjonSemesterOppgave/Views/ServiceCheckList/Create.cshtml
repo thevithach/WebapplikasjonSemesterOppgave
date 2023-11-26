@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ClutchlamelerSlitasje" class="control-label"></label>
@@ -55,7 +56,7 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="mechanicDone"/> @Html.DisplayNameFor(model => model.mechanicDone)
                 </label>
-                </div>
+            </div>
             <div class="form-group">
                 <label asp-for="SylinderLekkasje" class="control-label"></label>
                 <select asp-for="SylinderLekkasje" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
@@ -63,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="SlangeSkadeLekkasje" class="control-label"></label>
-                <select asp-for="SlangeSkadeLekkasje" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()"  class="form-control"></select>
+                <select asp-for="SlangeSkadeLekkasje" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
                 <span asp-validation-for="SlangeSkadeLekkasje" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -91,11 +92,11 @@
                 <select asp-for="Bremsesylinder" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
                 <span asp-validation-for="Bremsesylinder" class="text-danger"></span>
             </div>
-             <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="hydraulicsDone"/> @Html.DisplayNameFor(model => model.hydraulicsDone)
-                            </label>
-                            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="hydraulicsDone"/> @Html.DisplayNameFor(model => model.hydraulicsDone)
+                </label>
+            </div>
             <div class="form-group">
                 <label asp-for="LedningsnettpåVinsj" class="control-label"></label>
                 <select asp-for="LedningsnettpåVinsj" asp-items="Html.GetEnumSelectList<ChecklistItemCondition>()" class="form-control"></select>
@@ -115,35 +116,35 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="electricianDone"/> @Html.DisplayNameFor(model => model.electricianDone)
                 </label>
-                </div>
+            </div>
             <div class="form-group">
                 <label asp-for="XxBar" class="control-label"></label>
-                <input asp-for="XxBar" class="form-control" />
+                <input asp-for="XxBar" class="form-control"/>
                 <span asp-validation-for="XxBar" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="VinsjKjørAlleFunksjoner" class="control-label"></label>
-                <input asp-for="VinsjKjørAlleFunksjoner" class="form-control" />
+                <input asp-for="VinsjKjørAlleFunksjoner" class="form-control"/>
                 <span asp-validation-for="VinsjKjørAlleFunksjoner" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TrekkraftKN" class="control-label"></label>
-                <input asp-for="TrekkraftKN" class="form-control" />
+                <input asp-for="TrekkraftKN" class="form-control"/>
                 <span asp-validation-for="TrekkraftKN" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BremsekraftKN" class="control-label"></label>
-                <input asp-for="BremsekraftKN" class="form-control" />
+                <input asp-for="BremsekraftKN" class="form-control"/>
                 <span asp-validation-for="BremsekraftKN" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OrderId" class="control-label"></label>
-                <select asp-for="OrderId" class ="form-control" asp-items="ViewBag.OrderId"></select>
+                <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
             </div>
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary"/>
             </div>
         </form>
     </div>

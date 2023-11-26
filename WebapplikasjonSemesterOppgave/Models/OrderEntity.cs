@@ -27,18 +27,23 @@ namespace WebapplikasjonSemesterOppgave.Models
 			[Key]
             public int Id { get; set; }
             [Display(Name = "Produkt type")]
+            [StringLength(100)] 
             public string? ProductType { get; set; }
             [Display(Name = "Serienummer")]
+            [StringLength(100)] 
             public string? SerialNumber { get; set; }
             [Display(Name = "Årsmodell")]
+            [StringLength(50)] 
             public string? ModelYear { get; set; }
             [Display(Name = "Garanti")]
             public bool? Warranty { get; set; }
             [Display(Name = "Service eller reparasjon")]
             public bool? ServiceOrRepair { get; set; }
             [Display(Name = "Kundeavtale")]
+            [StringLength(500)] 
             public string? CustomerAgreement { get; set; }
             [Display(Name = "Reparasjonsdetaljer")]
+            [StringLength(500)] 
             public string? ReparationDetails { get; set; }
             [Display(Name = "Timer arbeidet")]
             public string? WorkingHours { get; set; }
@@ -51,6 +56,7 @@ namespace WebapplikasjonSemesterOppgave.Models
             [Display(Name = "Dato opprettet ordre")]
             public DateTime OrderCreatedDate { get; set; }
             [Display(Name = "Ordre kunde")]
+            [Required]
             public string OrderPlacerCustomer { get; set; }
             [Display(Name = "Dato mottatt produkt")]
             public DateTime? ProductReceivedDate { get; set; }
@@ -62,7 +68,10 @@ namespace WebapplikasjonSemesterOppgave.Models
             public SampleUser User { get; set; }
             [ValidateNever]
             public List<ServiceChecklistEntity> ChecklistItems { get; set; }
-            
+            /*
+            If we want a one-to-one relationship between OrderEntity and ServiceChecklistEntity
+            public ServiceChecklistEntity ChecklistItem { get; set; }
+            */
             public ServiceOrderStatus? OrderStatus
             {
 	            get
