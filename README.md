@@ -1,24 +1,25 @@
 # WebapplikasjonSemesterOppgave
-NB! : Må legge til rolle for å kunne registrere. 
+NB!: Må legge til rolle for å kunne registrere. 
 
 Kjør i terminal: 
 docker pull mariadb
 
-docker run --rm --name is201-mariadb -p 127.0.0.1:3306:3306/tcp -v /my/own/datadir:/var/lib/mysql -e
-MYSQL_ROOT_PASSWORD=Testingtesting1234 -d mariadb:latest
+Bash(MAC & LINUX): docker run --rm --name mariadb -p 3308:3306/tcp -v "$(pwd)/database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=12345 -d mariadb:10.5.11	
+Powershell(WINDOWS): docker run --rm --name mariadb -p 3308:3306/tcp -v "%cd%\database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=12345 -d mariadb:10.5.11
 
-Alternativ om ikke den over funker:
+Gå til pathen for prosjektmappen.
 
-docker run --rm --name is201-mariadb -p 127.0.0.1:3306:3306/tcp -v /var/lib/mysql -e
-MYSQL_ROOT_PASSWORD=Testingtesting1234 -d mariadb:latest
+Windows: Gå i package manager console og skriv "update-database"
 
-/my/own/datadir mappen kan endres til din egen, ellers lag mappen my, own og datadir.
-
-Gå i terminalen og gå deretter i my/own/datadir mappen også skriv pwd for å få pathen også erstatt /my/own/datadir med det du får fra pwd. Eks: /users/my/own/datadir
-
-Etter du har satt opp database:
+Alternativ løsning / (Mac & Linux)
 
 Kjør i terminal i prosjektmappe:
+
 dotnet tool install --global dotnet-ef
-dotnet ef database update --project ./WebapplikasjonSemesterOppgave --context ApplicationDbContext
+
 dotnet ef database update --project ./WebapplikasjonSemesterOppgave --context DbContextSample
+
+Appsettings.json må endres i Server fra "localhost" til "172.17.0.1" dersom det skal kjøres på docker.
+
+Kjør dockerfilen i mappen for å kjøre på applikasjonen på docker. 
+
