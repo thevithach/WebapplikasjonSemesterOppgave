@@ -20,7 +20,5 @@ public class SampleUser : IdentityUser
     public String Address { get; set; }
     [ValidateNever]
     public ICollection<OrderEntity> Order { get; set; }
-
-
 }
 
