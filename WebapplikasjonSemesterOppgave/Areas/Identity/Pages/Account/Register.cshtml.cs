@@ -71,8 +71,7 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        /// Represents the input model for user registration, containing user data.
         /// </summary>
         public class InputModel
         {
@@ -127,7 +126,11 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
 
         }
 
-
+        /// <summary>
+        /// Handles the get request for the registration page, preparing necessary data.
+        /// </summary>
+        /// <param name="returnUrl">The URL to return to after registration, if any.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -141,7 +144,12 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
                 })
             };
         }
-
+        
+        /// <summary>
+        /// Handles the post request for user registration, creating a new user and signing them in.
+        /// </summary>
+        /// <param name="returnUrl">The URL to return to after registration, if any.</param>
+        /// <returns>An IActionResult representing the completion of the registration process.</returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             //Sikkerhetsvalidering for å sikre at return url ikke er en ekstern link
@@ -183,8 +191,12 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        if(User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Index", "Users");
+                        }
+                        //Hvis brukeren ikke trenger å bekrefte kontoen sin, logges de inn og sendes tilbake til return url
+                        
                     }
                 }
                 foreach (var error in result.Errors)
@@ -196,7 +208,11 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
+        
+        /// <summary>
+        /// Creates a new instance of SampleUser.
+        /// </summary>
+        /// <returns>A new instance of SampleUser.</returns>
         private SampleUser CreateUser()
         {
             try

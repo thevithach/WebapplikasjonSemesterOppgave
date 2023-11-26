@@ -114,11 +114,14 @@
                 </div>
                         <hr/>
 
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="Id"/>
-            <button type="submit" class="btn btn-danger" value="Slett" style="width: 64%;" onclick="return confirm('Er du sikker du vil slette denne ordren?');">Delete</button>
-            <a asp-action="Index" class="btn btn-secondary mb-2" style="width: 35%;">Tilbake til ordreoversikt</a>
-        </form>
+                <form asp-action="Delete">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id"/>
+                                <div class="form-group text-center mb-2">
+                    <button type="submit" class="btn btn-danger" value="Slett" style="width: 64%;" onclick="return confirm('Er du sikker du vil slette denne ordren?');">Delete</button>
+                                <a asp-action="Index" class="btn btn-secondary" style="width: 33%;">Tilbake til ordreoversikt</a>
+                                </div>
+                </form>
                     <hr/>
 
         </div>

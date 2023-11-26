@@ -23,7 +23,12 @@ namespace WebapplikasjonSemesterOppgave.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
         }
-
+        
+        /// <summary>
+        /// Handles the post request for user logout, signing out the user.
+        /// </summary>
+        /// <param name="returnUrl">The URL to redirect to after logging out, if any.</param>
+        /// <returns>An IActionResult that redirects to the specified URL or the logout page upon successful logout.</returns>
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();

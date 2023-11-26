@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WebapplikasjonSemesterOppgave.Models;
 
@@ -44,6 +45,7 @@ public class ServiceChecklistEntity
         public string? TrekkraftKN{ get; set; }
         public string? BremsekraftKN { get; set; }
         public int OrderId { get; set; }
+        [ValidateNever]
         public OrderEntity Order { get; set; }
     
 

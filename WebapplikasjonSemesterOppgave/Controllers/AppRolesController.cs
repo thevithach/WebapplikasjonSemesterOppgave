@@ -6,29 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebapplikasjonSemesterOppgave.Controllers
 {
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AppRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         /// <summary>
-        /// Initialiserer en ny instans av AppRolesController klassen.
-        /// Denne konstruktøren tar en RoleManager<IdentityRole> som en avhengighet for å håndtere rolleoperasjoner.
+        /// Initializes a new instance of the AppRolesController class.
+        /// This constructor takes a RoleManager<IdentityRole> as a dependency to handle role operations.
         /// </summary>
-        /// <param name="roleManager">RoleManager brukes til å håndtere brukerroller i applikasjonen.</param>
+        /// <param name="roleManager">RoleManager is used to handle all user roles in the application </param>
         public AppRolesController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
         }
-        
         /// <summary>
-        /// Henter og viser en liste over alle roller i applikasjonen. 
-        /// Dette inkluderer alle roller som er opprettet.
+        /// Retriever a list of all roles in the application. This includes all roles created.
         /// </summary>
-        /// <returns>En View som inneholder en liste over roller.</returns>
+        /// <returns>A View that includes a list of all roles</returns>
         public IActionResult Index()
         {
             var roles = _roleManager.Roles;
@@ -36,20 +32,20 @@ namespace WebapplikasjonSemesterOppgave.Controllers
         }
         
         /// <summary>
-        /// Returnerer en view hvor en ny rolle kan opprettes. Denne metoden viser et skjema for oppretting av en ny rolle.
+        /// Returns a view where a role can be edited. This method shows a form for editing a role.
         /// </summary>
-        /// <returns>En View for å opprette en ny rolle.</returns>
+        /// <returns>A view to create a role</returns>
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
         /// <summary>
-        /// Oppretter en ny rolle i databasen, metoden sjekker om rollen eksisterer fra før
-        /// og unngår å opprette duplikater. Dersom rollen ikke eksieterer fra før opprettes den
+        /// Creates a new role in the database. The method checks if the role already exists
+        /// and avoids creating duplicates. If the role does not exist it is created.
         /// </summary>
-        /// <param name="model">Parameteren tar i mot en IdentityRole model som inneholder navnet på rollen</param>
-        /// <returns>Redirectes til index og viser en tabell med roller opprettet</returns>
+        /// <param name="model">The parameter takes a IdentityRole model that includes the name of the role</param>
+        /// <returns>Redirects to index and shows the list of created roles</returns>
         [HttpPost]
         public async Task<IActionResult> Create(IdentityRole model)
         {
@@ -60,6 +56,7 @@ namespace WebapplikasjonSemesterOppgave.Controllers
             }
             return RedirectToAction("Index");
         }
+        
     }
 }
 

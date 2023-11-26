@@ -250,7 +250,7 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Adminveien 1",
-                            ConcurrencyStamp = "8c90b5fc-94c3-4f96-a452-ac972b782698",
+                            ConcurrencyStamp = "05a32087-d177-4a35-816c-7470cd8f6366",
                             Email = "Admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -258,9 +258,9 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHYRI98LqXfoCwAXyoG8qWmBXC4VX9VnMez8qpkqblb9ErqV04bcJ6MMZGu3EUZD0A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFDXpJzTL68pG8j1MgWDr4vRocnnby8TtYws7wXyCIT8DpkvRH2CGKkK2ZJDq5v7Rw==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f5e2a0f4-16c0-4090-9dd8-3c0eb378c4d9",
+                            SecurityStamp = "7e763442-53d4-425f-8a0b-04fa8196be7a",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         });
@@ -273,10 +273,12 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CustomerAgreement")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("ModelYear")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime>("OrderCreatedDate")
                         .HasColumnType("datetime(6)");
@@ -292,16 +294,19 @@ namespace WebapplikasjonSemesterOppgave.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("ProductType")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ReparationDetails")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("ReplacedPartsReturned")
                         .HasColumnType("longtext");
 
                     b.Property<string>("SerialNumber")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<bool?>("ServiceOrRepair")
                         .HasColumnType("tinyint(1)");

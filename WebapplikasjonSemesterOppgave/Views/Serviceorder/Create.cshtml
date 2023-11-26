@@ -10,6 +10,7 @@
         <h1 class="text-center">Opprett Ordre</h1>
         <hr />
         <form asp-action="Create">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
                 <div class="col-md-6 form-group">
@@ -36,16 +37,16 @@
                 </div>
             </div>
             <div class="row">
-            <div class="col-md-6 form-group">
-                <label asp-for="ProductType" class="control-label"></label>
-                <input asp-for="ProductType" class="form-control"/>
-                <span asp-validation-for="ProductType" class="text-danger"></span>
-            </div>
-            <div class="col-md-6 form-group">
-                <label asp-for="SerialNumber" class="control-label"></label>
-                <input asp-for="SerialNumber" class="form-control"/>
-                <span asp-validation-for="SerialNumber" class="text-danger"></span>
-            </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="ProductType" class="control-label"></label>
+                    <input asp-for="ProductType" class="form-control"/>
+                    <span asp-validation-for="ProductType" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="SerialNumber" class="control-label"></label>
+                    <input asp-for="SerialNumber" class="form-control"/>
+                    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="ModelYear" class="control-label"></label>
@@ -53,9 +54,9 @@
                 <span asp-validation-for="ModelYear" class="text-danger"></span>
             </div>
             <div class="row"> <!-- Row for radio button groups -->
-                                       <!-- Warranty Field -->
+                <!-- Warranty Field -->
                 <div class="col-md-6 mt-2">
-                                           
+
                     <div class="form-group">
                         <label class="control-label">@Html.DisplayNameFor(model => model.Warranty)</label>
                         <div class="form-check form-check-inline">
@@ -69,7 +70,7 @@
                         </div>
                         <span asp-validation-for="Warranty" class="text-danger"></span>
                     </div>
-                    </div><!-- ServiceOrRepair Field -->
+                </div><!-- ServiceOrRepair Field -->
                 <div class="col-md-6 mt-2">
                     <div class="form-group">
                         <label class="control-label">@Html.DisplayNameFor(model => model.ServiceOrRepair)</label>
@@ -85,8 +86,8 @@
                         </div>
                         <span asp-validation-for="ServiceOrRepair" class="text-danger"></span>
                     </div>
-                    </div>
                 </div>
+            </div>
             <div class="form-group">
                 <label asp-for="CustomerAgreement" class="control-label"></label>
                 <textarea asp-for="CustomerAgreement" class="form-control"></textarea>
@@ -118,11 +119,11 @@
             </div>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group text-center mb-2">
-                <input type="submit" value="Create" class="btn btn-primary" style="width: 71%;"/>
-                <a asp-action="Index" class="btn btn-secondary" style="width: 28%">Back to List</a>
+                <input type="submit" value="Create" class="btn btn-primary" style="width: 66%;"/>
+                <a asp-action="Index" class="btn btn-secondary" style="width: 33%">Tilbake til ordreoversikt</a>
             </div>
-            
-            
+
+
         </form>
     </div>
 </div>

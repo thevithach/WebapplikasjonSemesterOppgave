@@ -13,6 +13,7 @@
         <h1 class="text-center">Rediger Ordre</h1>
         <hr />
         <form asp-action="Edit">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id"/>
             <div class="row"> <!-- Row start -->
@@ -51,7 +52,7 @@
             </div>
             <div class="row"> <!-- Row start -->
                 <div class="col-md-6">
-                    
+
                     <div class="form-group">
                         <label asp-for="OrderCreatedDate" class="control-label"></label>
                         <input asp-for="OrderCreatedDate" class="form-control"/>
@@ -64,44 +65,44 @@
                         <input asp-for="ProductAgreedCompletionDate" class="form-control"/>
                         <span asp-validation-for="ProductAgreedCompletionDate" class="text-danger"></span>
                     </div>
+                </div>
+            </div>
+            <div class="row"> <!-- Row for radio button groups -->
+                <!-- Warranty Field -->
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label class="control-label">@Html.DisplayNameFor(model => model.Warranty)</label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="Warranty" value="True" class="form-check-input"
+                                   asp-for="Warranty"/>
+                            <label class="form-check-label">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="Warranty" value="False" class="form-check-input" asp-for="Warranty"/>
+                            <label class="form-check-label">Nei</label>
+                        </div>
+                        <span asp-validation-for="Warranty" class="text-danger"></span>
                     </div>
                 </div>
-           <div class="row"> <!-- Row for radio button groups -->
-                           <!-- Warranty Field -->
-               <div class="col-md-6">
-                               
-                   <div class="form-group">
-                       <label class="control-label">@Html.DisplayNameFor(model => model.Warranty)</label>
-                       <div class="form-check form-check-inline">
-                           <input type="radio" name="Warranty" value="True" class="form-check-input"
-                                  asp-for="Warranty"/>
-                           <label class="form-check-label">Ja</label>
-                       </div>
-                       <div class="form-check form-check-inline">
-                           <input type="radio" name="Warranty" value="False" class="form-check-input" asp-for="Warranty"/>
-                           <label class="form-check-label">Nei</label>
-                       </div>
-                       <span asp-validation-for="Warranty" class="text-danger"></span>
-                       </div>
-                   </div>
-                           <!-- ServiceOrRepair Field -->
-                           <div class="col-md-6">
-                               <div class="form-group">
-                                   <label class="control-label">@Html.DisplayNameFor(model => model.ServiceOrRepair)</label>
-                                   <div class="form-check form-check-inline">
-                                       <input type="radio" name="ServiceOrRepair" value="True" class="form-check-input" 
-                                              asp-for="ServiceOrRepair" />
-                                       <label class="form-check-label">Ja</label>
-                                   </div>
-                                   <div class="form-check form-check-inline">
-                                       <input type="radio" name="ServiceOrRepair" value="False" class="form-check-input" 
-                                              asp-for="ServiceOrRepair" />
-                                       <label class="form-check-label">Nei</label>
-                                   </div>
-                                   <span asp-validation-for="ServiceOrRepair" class="text-danger"></span>
-                               </div>
-                           </div>
-                       </div>
+                <!-- ServiceOrRepair Field -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">@Html.DisplayNameFor(model => model.ServiceOrRepair)</label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="ServiceOrRepair" value="True" class="form-check-input"
+                                   asp-for="ServiceOrRepair"/>
+                            <label class="form-check-label">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="ServiceOrRepair" value="False" class="form-check-input"
+                                   asp-for="ServiceOrRepair"/>
+                            <label class="form-check-label">Nei</label>
+                        </div>
+                        <span asp-validation-for="ServiceOrRepair" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label asp-for="CustomerAgreement" class="control-label"></label>
                 <textarea asp-for="CustomerAgreement" class="form-control"></textarea>
@@ -112,31 +113,31 @@
                 <textarea asp-for="ReparationDetails" class="form-control"></textarea>
                 <span asp-validation-for="ReparationDetails" class="text-danger"></span>
             </div>
-            
-           
-                    <div class="form-group">
-                        <label asp-for="WorkingHours" class="control-label"></label>
-                        <input asp-for="WorkingHours" class="form-control"/>
-                        <span asp-validation-for="WorkingHours" class="text-danger"></span>
-                    </div>
-      
-                           
+
+
+            <div class="form-group">
+                <label asp-for="WorkingHours" class="control-label"></label>
+                <input asp-for="WorkingHours" class="form-control"/>
+                <span asp-validation-for="WorkingHours" class="text-danger"></span>
+            </div>
+
+
             <div class="row"> <!-- Row start -->
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="ReplacedPartsReturned" class="control-label"></label>
                         <input asp-for="ReplacedPartsReturned" class="form-control"/>
                         <span asp-validation-for="ReplacedPartsReturned" class="text-danger"></span>
-                        </div>
                     </div>
+                </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="ShippingMethods" class="control-label"></label>
                         <input asp-for="ShippingMethods" class="form-control"/>
                         <span asp-validation-for="ShippingMethods" class="text-danger"></span>
                     </div>
-                    </div>
                 </div>
+            </div>
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
                 <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
@@ -144,7 +145,7 @@
             </div>
             <div class="form-group text-center mt-2">
                 <input type="submit" value="Lagre" class="btn btn-primary" style="width: 68%;"/>
-            
+
                 <a asp-action="Index" class="btn btn-secondary" style="width: 31%">Tilbake til ordreoversikt</a>
             </div>
             <div asp-validation-summary="All"></div>

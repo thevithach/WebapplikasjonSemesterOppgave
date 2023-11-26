@@ -20,7 +20,12 @@ namespace WebapplikasjonSemesterOppgave.Data
             _context = context;
         }
         
-    
+        /// <summary>
+        /// Retrieves and displays details of a specific service order.
+        /// </summary>
+        /// <param name="id">The ID of the service order to display.</param>
+        /// <returns>An IActionResult representing the details view of the service order. Returns NotFound if the order is not found.</returns>
+        [HttpGet]
         public IActionResult ServiceOrderDetails(int id)
         {
             var serviceOrder = _context.OrderEntity.Find(id);
@@ -30,8 +35,13 @@ namespace WebapplikasjonSemesterOppgave.Data
             }
             return View("Details", serviceOrder);
         }
-
-        // GET: Serviceorder
+        
+        /// <summary>
+        /// Displays a list of service orders, optionally filtered by status.
+        /// </summary>
+        /// <param name="statusFilter">An optional filter to view service orders by their status.</param>
+        /// <returns>An IActionResult representing the index view with a list of service orders.</returns>
+        [HttpGet]
         public async Task<IActionResult> Index(ServiceOrderStatus? statusFilter = null)
         {
             var orders = await _context.OrderEntity
@@ -51,8 +61,12 @@ namespace WebapplikasjonSemesterOppgave.Data
 
 
         
-
-        // GET: Serviceorder/Details/5
+        /// <summary>
+        /// Displays details of a specific service order.
+        /// </summary>
+        /// <param name="id">The ID of the service order.</param>
+        /// <returns>An IActionResult representing the details view of the service order. Returns NotFound if the order or ID is null.</returns>
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.OrderEntity == null)
@@ -71,12 +85,20 @@ namespace WebapplikasjonSemesterOppgave.Data
             return View(orderEntity);
         }
 
-        // GET: Serviceorder/Create
+        /// <summary>
+        /// Displays the view for creating a new service order.
+        /// </summary>
+        /// <returns>An IActionResult representing the create view for service orders.</returns>
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
+        /// <summary>
+        /// Handles the creation of a new service order.
+        /// </summary>
+        /// <param name="order">The service order to create.</param>
+        /// <returns>Redirects to the Index action on success, or returns to the Create view on failure.</returns>
         [HttpPost]
         public async Task<IActionResult> Create(OrderEntity order)
         {
@@ -93,7 +115,7 @@ namespace WebapplikasjonSemesterOppgave.Data
                     // Set the attributes of the checklist item
                     OrderId = order.Id,
 
-                    // Set the properties for the checklist items based on your form data or requirements
+                    // Properties based on the checklist
                     ClutchlamelerSlitasje = null,
                     Bremser = null,
                     LagerforTrommel = null,
@@ -117,11 +139,10 @@ namespace WebapplikasjonSemesterOppgave.Data
                     TestRadio = null,
                     Knappekasse = null,
                     electricianDone = null,
-                    XxBar = "",
-                    VinsjKjørAlleFunksjoner = "",
-                    TrekkraftKN = "",
-                    BremsekraftKN = "",
-                    // ... set other properties similarly
+                    XxBar = null,
+                    VinsjKjørAlleFunksjoner = null,
+                    TrekkraftKN = null,
+                    BremsekraftKN = null,
                 };
                 // Add the checklist item to the context
                 _context.ChecklistItems.Add(checklist);
@@ -134,7 +155,12 @@ namespace WebapplikasjonSemesterOppgave.Data
             return View();
         }
         
-        // GET: Serviceorder/Edit/5
+        /// <summary>
+        /// Displays the edit view for a specific service order.
+        /// </summary>
+        /// <param name="id">The ID of the service order to edit.</param>
+        /// <returns>An IActionResult representing the edit view for the service order. Returns NotFound if the order or ID is null.</returns>
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.OrderEntity == null)
@@ -150,9 +176,12 @@ namespace WebapplikasjonSemesterOppgave.Data
             return View(orderEntity);
         }
 
-        // POST: Serviceorder/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles the submission of an edited service order.
+        /// </summary>
+        /// <param name="id">The ID of the service order being edited.</param>
+        /// <param name="orderEntity">The edited service order.</param>
+        /// <returns>Redirects to the Index action on success, or returns to the Edit view on failure.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProductType,SerialNumber,ModelYear,Warranty,ServiceOrRepair,CustomerAgreement,ReparationDetails,WorkingHours,ReplacedPartsReturned,ShippingMethods,OrderCreatedDate,OrderPlacerCustomer,ProductReceivedDate,ProductAgreedCompletionDate,UserId")] OrderEntity orderEntity)
@@ -184,8 +213,13 @@ namespace WebapplikasjonSemesterOppgave.Data
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderEntity.UserId);
             return View(orderEntity);
         }
-
-        // GET: Serviceorder/Delete/5
+        
+        /// <summary>
+        /// Displays the delete confirmation view for a specific service order.
+        /// </summary>
+        /// <param name="id">The ID of the service order to delete.</param>
+        /// <returns>An IActionResult representing the delete confirmation view for the service order. Returns NotFound if the order or ID is null.</returns>
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.OrderEntity == null)
@@ -204,7 +238,11 @@ namespace WebapplikasjonSemesterOppgave.Data
             return View(orderEntity);
         }
 
-        // POST: Serviceorder/Delete/5
+        /// <summary>
+        /// Confirms and processes the deletion of a specific service order.
+        /// </summary>
+        /// <param name="id">The ID of the service order to delete.</param>
+        /// <returns>Redirects to the Index action on successful deletion, or returns a Problem detail if the entity set is null.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -213,6 +251,7 @@ namespace WebapplikasjonSemesterOppgave.Data
             {
                 return Problem("Entity set 'DBContextSample.OrderEntity'  is null.");
             }
+            
             var orderEntity = await _context.OrderEntity.FindAsync(id);
             if (orderEntity != null)
             {
@@ -222,7 +261,12 @@ namespace WebapplikasjonSemesterOppgave.Data
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
+        /// <summary>
+        /// Checks if a service order entity exists in the database.
+        /// </summary>
+        /// <param name="id">The ID of the service order entity to check.</param>
+        /// <returns>True if the service order entity exists, otherwise false.</returns>
         private bool OrderEntityExists(int id)
         {
           return (_context.OrderEntity?.Any(e => e.Id == id)).GetValueOrDefault();

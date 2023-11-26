@@ -21,20 +21,21 @@ public class DBContextSample : IdentityDbContext<SampleUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
         builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+        // Configure the primary key for SampleUser entity
         builder.Entity<SampleUser>().HasKey(u => u.Id);
+        // Define a one-to-many relationship between SampleUser and OrderEntity
         builder.Entity<SampleUser>()
-            .HasMany<OrderEntity> (user => user.Order) // Assuming you have a navigation property named "Order" in SampleUser
-            .WithOne(order => order.User) // Assuming you have a navigation property named "User" in OrderEntity
+            .HasMany<OrderEntity> (user => user.Order) 
+            .WithOne(order => order.User) 
             .HasForeignKey(order => order.UserId); // The foreign key relationship
-
+        
+        // Configure the primary key for OrderEntity
         builder.Entity<OrderEntity>().HasKey(order => order.Id);
+        // Define a relationship between ServiceChecklistEntity and OrderEntity
         builder.Entity<ServiceChecklistEntity>()
             .HasOne(c => c.Order)
-            .WithMany(o => o.ChecklistItems)
+            .WithMany(o => o.ChecklistItems) // Can be changed to WithOne if we want one-to-one, also need to change navigation in orderentity then.
             .HasForeignKey(c => c.OrderId);
         builder.Entity<IdentityRole>().HasData(
             new IdentityRole()
@@ -64,8 +65,7 @@ public class DBContextSample : IdentityDbContext<SampleUser>
                 SecurityStamp = Guid.NewGuid().ToString()
             }
         );
-        //Seeding the relation between our user and role to AspNetUserRoles table
-
+        // Seed the relation between user and role
         builder.Entity<IdentityUserRole<string>>().HasData(
             new IdentityUserRole<string>()
             {
@@ -76,8 +76,15 @@ public class DBContextSample : IdentityDbContext<SampleUser>
     }
 
 }
+/// <summary>
+/// Represents the configuration for the ApplicationUserEntity.
+/// </summary>
 public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<SampleUser>
 {
+    /// <summary>
+    /// Configures the properties of the ApplicationUserEntity.
+    /// </summary>
+    /// <param name="builder">The entity type builder to use for configuration.</param>
     public void Configure(EntityTypeBuilder<SampleUser> builder)
     {
         builder.Property(x => x.FirstName).HasMaxLength(100);

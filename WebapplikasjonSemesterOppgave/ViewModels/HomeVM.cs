@@ -1,7 +1,7 @@
 ﻿using System;
 namespace WebapplikasjonSemesterOppgave.ViewModels
 {
-	public class HomeViewModel
+	public class HomeVM
 	{
         //Parametre for HomeController for å definere SVG Ikon, Text og AspAction for Home/Index
         public string SvgPath { get; set; }
