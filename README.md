@@ -1,5 +1,5 @@
 # WebapplikasjonSemesterOppgave
-NB!: Må legge til rolle for å kunne registrere. 
+NB!: Admin bruker "Admin@gmail.com" "Admin123*"
 
 Kjør i terminal: 
 docker pull mariadb
