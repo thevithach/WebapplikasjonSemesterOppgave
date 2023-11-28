@@ -28,9 +28,9 @@ namespace WebapplikasjonSemesterOppgave.Data
         /// <param name="id">The ID of the service order to display.</param>
         /// <returns>An IActionResult representing the details view of the service order. Returns NotFound if the order is not found.</returns>
         [HttpGet]
-        public IActionResult ServiceOrderDetails(int id)
+        public async Task<IActionResult> ServiceOrderDetails(int id)
         {
-            var serviceOrder = _context.OrderEntity.Find(id);
+            var serviceOrder = await _context.OrderEntity.FindAsync(id);
             if (serviceOrder == null)
             {
                 return NotFound();
@@ -73,9 +73,7 @@ namespace WebapplikasjonSemesterOppgave.Data
                 return NotFound();
             }
 
-            var orderEntity = await _context.OrderEntity
-                .Include(o => o.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var orderEntity = await GetServiceOrderById(id.Value);
             if (orderEntity == null)
             {
                 return NotFound();
@@ -90,7 +88,7 @@ namespace WebapplikasjonSemesterOppgave.Data
         /// <returns>An IActionResult representing the create view for service orders.</returns>
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            InitializeUserData();            
             return View();
         }
         /// <summary>
@@ -151,7 +149,8 @@ namespace WebapplikasjonSemesterOppgave.Data
                 return RedirectToAction("Index");
 
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+
+            InitializeUserData();            
             return View();
         }
         
@@ -167,12 +166,13 @@ namespace WebapplikasjonSemesterOppgave.Data
             {
                 return NotFound();
             }
-            var orderEntity = await _context.OrderEntity.FindAsync(id);
+            var orderEntity = await GetServiceOrderById(id.Value);
             if (orderEntity == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderEntity.UserId);
+
+            InitializeUserData();
             return View(orderEntity);
         }
         
@@ -211,7 +211,8 @@ namespace WebapplikasjonSemesterOppgave.Data
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderEntity.UserId);
+
+            InitializeUserData();
             return View(orderEntity);
         }
         
@@ -228,9 +229,7 @@ namespace WebapplikasjonSemesterOppgave.Data
                 return NotFound();
             }
 
-            var orderEntity = await _context.OrderEntity
-                .Include(o => o.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var orderEntity = await GetServiceOrderById(id.Value);
             if (orderEntity == null)
             {
                 return NotFound();
@@ -253,7 +252,7 @@ namespace WebapplikasjonSemesterOppgave.Data
                 return Problem("Entity set 'DBContextSample.OrderEntity'  is null.");
             }
             
-            var orderEntity = await _context.OrderEntity.FindAsync(id);
+            var orderEntity = await GetServiceOrderById(id);
             if (orderEntity != null)
             {
                 _context.OrderEntity.Remove(orderEntity);
@@ -272,5 +271,16 @@ namespace WebapplikasjonSemesterOppgave.Data
         {
           return (_context.OrderEntity?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        private async Task<OrderEntity> GetServiceOrderById(int id)
+        {
+            return await _context.OrderEntity
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+        }
+        private void InitializeUserData()
+        {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+        }
+
     }
 }
