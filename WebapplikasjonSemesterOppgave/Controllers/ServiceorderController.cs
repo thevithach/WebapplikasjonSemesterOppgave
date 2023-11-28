@@ -99,6 +99,7 @@ namespace WebapplikasjonSemesterOppgave.Data
         /// <param name="order">The service order to create.</param>
         /// <returns>Redirects to the Index action on success, or returns to the Create view on failure.</returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OrderEntity order)
         {
 
@@ -174,7 +175,8 @@ namespace WebapplikasjonSemesterOppgave.Data
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", orderEntity.UserId);
             return View(orderEntity);
         }
-
+        
+        
         /// <summary>
         /// Handles the submission of an edited service order.
         /// </summary>
