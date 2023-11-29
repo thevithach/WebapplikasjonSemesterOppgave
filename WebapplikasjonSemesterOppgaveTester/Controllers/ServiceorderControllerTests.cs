@@ -112,12 +112,14 @@ public class ServiceorderControllerUnitTests
         await _context.SaveChangesAsync();
 
         // Act
-        var result = await _controller.DeleteConfirmed(orderToDelete.Id); // Assuming the action is named DeleteConfirmed
-
+        var result = await _controller.DeleteConfirmed(orderToDelete.Id); 
+        
         // Assert
         var deletedEntity = _context.OrderEntity.Find(orderToDelete.Id);
         Assert.Null(deletedEntity);
     }
+    
+
     
     /// <summary>
     /// Verifies that the ServiceOrderDetails action in the ServiceorderController, when given a valid ID, returns the corresponding service order.
@@ -135,13 +137,14 @@ public class ServiceorderControllerUnitTests
         var orderId = testOrdre.Id; // Get the generated ID
 
         // Act
-        var result = _controller.ServiceOrderDetails(orderId); 
+        var result = await _controller.ServiceOrderDetails(orderId); // Await the async method
 
         // Assert
         var viewResult = Assert.IsType<ViewResult>(result);
         var model = Assert.IsType<OrderEntity>(viewResult.Model);
         Assert.Equal(orderId, model.Id); // Use the generated ID for comparison
     }
+
 
     /// <summary>
     /// Verifies that the ServiceOrderDetails action in the ServiceorderController, when given an invalid ID, returns a NotFound result.
